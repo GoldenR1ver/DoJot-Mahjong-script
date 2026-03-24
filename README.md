@@ -130,19 +130,19 @@ python Optimizer/BayesianOptimizer.py ^
 
 比较有代表性的一把：末巡拒听两次一气通贯
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\noTen1.png)
+![](Example\noTen1.png)
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\noTen2.png)
+![](Example\noTen2.png)
 
 看看总牌河
 
-![](C:\Users\25293\AppData\Roaming\marktext\images\2026-03-24-23-10-04-image.png)
+![](Example\allDiscard.png)
 
 这是因为我的防守逻辑是选择一名玩家统计其危险值，在认为某个玩家非常危险的时候相当于根据他的牌河单防他。只会打他打过的现物。
 
 来看看日志：
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\bad3m.png)
+![](Example\bad3m.png)
 
 日志里面没有3m 5p，认为这都是危险牌/高价值牌，尽可能不要打出去。
 
@@ -150,13 +150,13 @@ python Optimizer/BayesianOptimizer.py ^
 
 ### 非常高牌效的切牌
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\45779-45579.png)
+![](Example\45779-45579.png)
 
 一个简单的例子：45779->45579
 
 确实牌效高，确实如果自己打就会顺手打5m，甚至为了碰牌多一点会打9m，如果那么打后面很不舒服了
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\ron.png)
+![](Example\ron.png)
 
 当然这把奶奶发牌也没有什么影响（
 
@@ -164,7 +164,7 @@ python Optimizer/BayesianOptimizer.py ^
 
 比如说大四喜，小四喜，大三元，清一色，混一色，字一色
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\dangerousMeld.png)
+![](Example\dangerousMeld.png)
 
 上家保底混一色自风场风四番满贯，不能点，放铳的输分期望太高了
 
@@ -174,9 +174,9 @@ python Optimizer/BayesianOptimizer.py ^
 
 用AI收集数据打了4天麻将
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\result2.png)
+![](Example\result2.png)
 
-![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\result1.png)
+![](Example\result1.png)
 
 四麻段位从雀杰1星200分到三星1361分，感觉再挂一晚上能上雀豪啊。
 
