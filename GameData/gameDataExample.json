@@ -1,0 +1,201 @@
+{
+    "metadata": {
+      "game_id": "20250324_132045_room4",
+      "timestamp": "2025-03-24T13:20:45.123Z",
+      "room_info": {
+        "room_type": "金之间",
+        "game_mode": "四人南",
+        "room_id": 4,
+        "room_name": "Gold Room (South Round, 4-Player)",
+        "client_language": "chs"
+      },
+      "duration_seconds": 1860,
+      "ai_parameters": {
+        "hand_evaluation": {
+          "efficiency": 1.0,
+          "safety": 1.0,
+          "sakigiri": 1.0
+        },
+        "strategy": {
+          "riichi": 1.0,
+          "chiitoitsu": 5,
+          "thirteen_orphans": 10
+        },
+        "performance_mode": 4
+      }
+    },
+  
+    "overall_statistics": {
+      "final_scores": [30200, 24600, 19800, 25400],
+      "final_ranking": [1, 3, 4, 2],
+      "total_rounds": 8,
+  
+      "tenpai_stats": {
+        "total_tenpai_occurrences": 5,
+        "tenpai_frequency": 0.625,
+        "tenpai_by_round": {
+          "east_round": 3,
+          "south_round": 2
+        },
+        "tenpai_yaku_distribution": {
+          "riichi": 3,
+          "tanyao": 2,
+          "pinfu": 1,
+          "yakuhai": 1,
+          "dora": 4
+        },
+        "expected_han_stats": {
+          "total_expected_han": 24,
+          "average_expected_han": 4.8,
+          "min_expected_han": 2,
+          "max_expected_han": 8,
+          "distribution": [
+            { "han": 2, "count": 1 },
+            { "han": 3, "count": 2 },
+            { "han": 4, "count": 1 },
+            { "han": 8, "count": 1 }
+          ]
+        }
+      },
+  
+      "win_stats": {
+        "total_wins": 3,
+        "win_frequency": 0.375,
+        "win_rate_given_tenpai": 0.6,
+        "total_win_score": 52000,
+        "average_win_score": 17333,
+        "min_win_score": 8000,
+        "max_win_score": 32000,
+        "win_score_distribution": [
+          { "score_range": "<10000", "count": 1 },
+          { "score_range": "10000-20000", "count": 1 },
+          { "score_range": ">20000", "count": 1 }
+        ],
+  
+        "win_yaku_details": [
+          {
+            "game_index": 2,
+            "yaku_list": ["riichi", "tanyao", "dora2", "tsumo"],
+            "total_han": 6,
+            "fu": 30,
+            "score": 12000,
+            "win_type": "tsumo",
+            "dora_count": 2,
+            "ura_dora_count": 0
+          },
+          {
+            "game_index": 5,
+            "yaku_list": ["riichi", "pinfu", "dora1", "riichi_ippatsu"],
+            "total_han": 5,
+            "fu": 30,
+            "score": 8000,
+            "win_type": "ron",
+            "dora_count": 1,
+            "ura_dora_count": 1
+          },
+          {
+            "game_index": 7,
+            "yaku_list": ["daisangen"],
+            "total_han": 13,
+            "fu": 50,
+            "score": 32000,
+            "win_type": "ron",
+            "dora_count": 0,
+            "ura_dora_count": 0
+          }
+        ],
+  
+        "dora_stats": {
+          "total_dora_in_wins": 3,
+          "average_dora_per_win": 1.0,
+          "dora_frequency": 1.0,
+          "dora_distribution": {
+            "0_dora": 1,
+            "1_dora": 1,
+            "2_dora": 1,
+            "3+_dora": 0
+          }
+        }
+      },
+  
+      "deal_in_stats": {
+        "total_deal_ins": 2,
+        "deal_in_frequency": 0.25,
+        "total_deal_in_score": 26000,
+        "average_deal_in_score": 13000,
+        "min_deal_in_score": 8000,
+        "max_deal_in_score": 18000,
+        "deal_in_details": [
+          {
+            "game_index": 3,
+            "score": 8000,
+            "to_player": 1,
+            "yaku": ["riichi", "dora1"]
+          },
+          {
+            "game_index": 6,
+            "score": 18000,
+            "to_player": 3,
+            "yaku": ["honitsu", "dora2"]
+          }
+        ]
+      },
+  
+      "riichi_stats": {
+        "total_riichi_calls": 4,
+        "riichi_frequency_given_tenpai": 0.8,
+        "riichi_success_rate": 0.75,
+        "riichi_stick_count": 1,
+        "riichi_details": [
+          {
+            "game_index": 2,
+            "successful": true,
+            "win_score": 12000,
+            "ippatsu": false,
+            "ura_dora_count": 0
+          },
+          {
+            "game_index": 4,
+            "successful": false,
+            "deal_in": false,
+            "ended_in_draw": true
+          }
+        ]
+      },
+  
+      "fold_stats": {
+        "total_fold_occurrences": 2,
+        "fold_frequency": 0.25,
+        "fold_by_round": {
+          "east_round": 1,
+          "south_round": 1
+        },
+        "fold_details": [
+          {
+            "game_index": 1,
+            "reason": "high_danger_multiple_riichi",
+            "tiles_left": 15,
+            "shanten": 2
+          },
+          {
+            "game_index": 8,
+            "reason": "last_place_defense",
+            "tiles_left": 8,
+            "shanten": 1
+          }
+        ]
+      },
+  
+      "efficiency_stats": {
+        "average_shanten_improvement_per_discard": 0.42,
+        "average_efficiency_score": 7.8,
+        "calls_made": {
+          "pon": 2,
+          "chi": 1,
+          "kan": 0
+        },
+        "call_success_rate": 0.67
+      }
+    }
+  }
+  

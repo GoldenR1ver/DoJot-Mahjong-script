@@ -1,0 +1,407 @@
+{
+    "PERFORMANCE_MODE": {
+      "type": "int",
+      "low": 0,
+      "high": 4
+    },
+    
+    "HAND_EVALUATION": {
+      "EFFICIENCY": {
+        "type": "float",
+        "low": 0.6,
+        "high": 1.8
+      },
+      "SAFETY": {
+        "type": "float",
+        "low": 0.6,
+        "high": 2.0
+      },
+      "SAKIGIRI": {
+        "type": "float",
+        "low": 0.5,
+        "high": 2.0
+      }
+    },
+    
+    "CALL": {
+      "CALL_PON_CHI": {
+        "type": "float",
+        "low": 0.5,
+        "high": 1.8
+      },
+      "CALL_KAN": {
+        "type": "float",
+        "low": 0.3,
+        "high": 1.5
+      }
+    },
+    
+    "STRATEGY": {
+      "RIICHI": {
+        "type": "float",
+        "low": 0.0,
+        "high": 2.0
+      },
+      "CHIITOITSU": {
+        "type": "int",
+        "low": 4,
+        "high": 6
+      },
+      "THIRTEEN_ORPHANS": {
+        "type": "int",
+        "low": 9,
+        "high": 12
+      },
+      "KEEP_SAFETILE": {
+        "type": "categorical",
+        "choices": [true, false]
+      }
+    },
+    
+    "MISC": {
+      "LOG_AMOUNT": {
+        "type": "int",
+        "low": 0,
+        "high": 20
+      },
+      "DEBUG_BUTTON": {
+        "type": "categorical",
+        "choices": [true, false]
+      },
+      "USE_EMOJI": {
+        "type": "categorical",
+        "choices": [true, false]
+      },
+      "CHANGE_RECOMMEND_TILE_COLOR": {
+        "type": "categorical",
+        "choices": [true, false]
+      }
+    },
+    
+    "WAIT_QUALITY": {
+      "BASE_QUALITY": {
+        "type": "float",
+        "low": 1.0,
+        "high": 1.8
+      },
+      "MIN_QUALITY": {
+        "type": "float",
+        "low": 0.4,
+        "high": 1.0
+      },
+      "DEAL_IN_CHANCE_MULTIPLIER": {
+        "type": "float",
+        "low": 2.0,
+        "high": 8.0
+      }
+    },
+    
+    "PUSH_FOLD": {
+      "OPEN_FACTOR": {
+        "type": "float",
+        "low": 1.0,
+        "high": 1.8
+      },
+      "TENPAI_DIVISOR": {
+        "type": "int",
+        "low": 30,
+        "high": 50
+      },
+      "ISHANTEN_DIVISOR": {
+        "type": "int",
+        "low": 35,
+        "high": 60
+      },
+      "ISDANGER_CRITICAL": {
+        "type": "int",
+        "low": 10,
+        "high": 40
+      },
+      "DANGER_CRITICAL": {
+        "type": "int",
+        "low": 2000,
+        "high": 5000
+      },
+      "DEALER_FACTOR": {
+        "type": "float",
+        "low": 1.2,
+        "high": 2.5
+      },
+      "ALLLAST_LASTONE_FACTOR": {
+        "type": "float",
+        "low": 0.3,
+        "high": 0.9
+      },
+      "SAFETY_FACTOR": {
+        "type": "float",
+        "low": 0.5,
+        "high": 2.0
+      },
+      "FOLD_BASE_VALUE": {
+        "type": "float",
+        "low": 4.0,
+        "high": 9.0
+      },
+      "LESS_SAFE_TILE_FACTOR": {
+        "type": "float",
+        "low": 0.7,
+        "high": 1.8
+      },
+      "LESS_TILE_FACTOR": {
+        "type": "float",
+        "low": 0.7,
+        "high": 1.8
+      }
+    },
+    
+    "FOLD_THRESHOLD": {
+      "TILES_LEFT_NO_TEN_THRESHOLD": {
+        "type": "int",
+        "low": 6,
+        "high": 12
+      },
+      "NO_TEN_PENALTY_BASE": {
+        "type": "int",
+        "low": 100,
+        "high": 400
+      },
+      "NO_TEN_PENALTY_DIVISOR": {
+        "type": "int",
+        "low": 3,
+        "high": 6
+      },
+      "NO_TEN_PENALTY_STEP": {
+        "type": "int",
+        "low": 50,
+        "high": 200
+      },
+      "SHAPE_CLAMP_MIN": {
+        "type": "float",
+        "low": 0.2,
+        "high": 0.8
+      },
+      "SHAPE_CLAMP_MAX": {
+        "type": "float",
+        "low": 1.5,
+        "high": 3.0
+      },
+      "FOLD_VALUE_SHANTEN_EFF_MULTIPLIER": {
+        "type": "int",
+        "low": 1200,
+        "high": 3200
+      },
+      "FOLD_VALUE_DIVISOR": {
+        "type": "int",
+        "low": 300,
+        "high": 800
+      },
+      "GET_DISTANCE_TO_FIRST_DIVISOR": {
+        "type": "int",
+        "low": 20000,
+        "high": 50000
+      },
+      "GET_DISTANCE_TO_FIRST_FLOOR": {
+        "type": "float",
+        "low": -0.8,
+        "high": -0.2
+      },
+      "WALL_ADJUST_BASE": {
+        "type": "float",
+        "low": 0.8,
+        "high": 1.2
+      },
+      "WALL_SIZE_HALF_DIVISOR": {
+        "type": "float",
+        "low": 1.5,
+        "high": 3.0
+      },
+      "WALL_SIZE_DOUBLE_DIVISOR": {
+        "type": "float",
+        "low": 1.5,
+        "high": 3.0
+      },
+      "SAFE_TILES_ADJUST_BASE": {
+        "type": "float",
+        "low": 0.8,
+        "high": 1.2
+      },
+      "SAFE_TILES_CENTER": {
+        "type": "float",
+        "low": 0.3,
+        "high": 0.8
+      },
+      "SAFE_TILES_DIVISOR": {
+        "type": "float",
+        "low": 2.0,
+        "high": 6.0
+      },
+      "HAND_LENGTH_BASE_FACTOR": {
+        "type": "float",
+        "low": 1.5,
+        "high": 2.5
+      },
+      "HAND_LENGTH_DIVISOR": {
+        "type": "int",
+        "low": 10,
+        "high": 14
+      },
+      "FOLD_VALUE_DECIMALS": {
+        "type": "int",
+        "low": 0,
+        "high": 4
+      }
+    },
+    
+    "RIICHI_DECISION": {
+      "BAD_WAIT_BASE": {
+        "type": "int",
+        "low": 4,
+        "high": 7
+      },
+      "BAD_WAIT_BASE_CHIITOITSU": {
+        "type": "int",
+        "low": 2,
+        "high": 5
+      },
+      "NO_WAIT_MAX": {
+        "type": "int",
+        "low": 1,
+        "high": 2
+      },
+      "TILES_LEFT_CLOSE_TO_END_BASE": {
+        "type": "int",
+        "low": 5,
+        "high": 10
+      },
+      "HUGE_LEAD_DISTANCE_TO_FIRST": {
+        "type": "int",
+        "low": -15000,
+        "high": -6000
+      },
+      "FIRST_PLACE_DISTANCE_TO_FIRST_MAX": {
+        "type": "int",
+        "low": -1000,
+        "high": 1000
+      },
+      "RIICHI_DANGER_SCORE_OFFSET": {
+        "type": "int",
+        "low": 500,
+        "high": 1500
+      },
+      "ENOUGH_YAKU_MIN_CLOSED": {
+        "type": "int",
+        "low": 1,
+        "high": 2
+      },
+      "DEALER_SCORE_DIVISOR": {
+        "type": "float",
+        "low": 1.3,
+        "high": 1.8
+      },
+      "ENOUGH_YAKU_HAND_SCORE_BASE": {
+        "type": "int",
+        "low": 3000,
+        "high": 7000
+      },
+      "YAKU_WAIT_SCORE_MULTIPLIER": {
+        "type": "int",
+        "low": 300,
+        "high": 800
+      },
+      "HIGH_VALUE_NO_YAKU_MIN_CLOSED": {
+        "type": "float",
+        "low": 0.5,
+        "high": 1.2
+      },
+      "HIGH_VALUE_NO_YAKU_HAND_SCORE_BASE": {
+        "type": "int",
+        "low": 4000,
+        "high": 8000
+      },
+      "LOTS_OF_DORA_INDICATORS_MIN_COUNT": {
+        "type": "int",
+        "low": 2,
+        "high": 4
+      },
+      "NOT_DEALER_WORTHLESS_HAND_SCORE_BASE": {
+        "type": "int",
+        "low": 3000,
+        "high": 6000
+      },
+      "SHAPE_THRESHOLD": {
+        "type": "float",
+        "low": 0.2,
+        "high": 0.8
+      },
+      "LAST_GAME_DISTANCE_TO_NEXT_MIN": {
+        "type": "int",
+        "low": -3000,
+        "high": -500
+      },
+      "LAST_GAME_DISTANCE_TO_NEXT_MAX": {
+        "type": "int",
+        "low": -500,
+        "high": 1000
+      }
+    },
+    
+    "DISCARD_FOLD": {
+      "SAME_SHANTEN_DANGER_TOLERANCE_MULTIPLIER": {
+        "type": "float",
+        "low": 1.0,
+        "high": 1.4
+      },
+      "FOLD_THRESHOLD_DANGER_MULTIPLIER": {
+        "type": "float",
+        "low": 1.2,
+        "high": 3.0
+      }
+    },
+    
+    "TILE_PRIORITY": {
+      "FIRST_PLACE_LAST_GAME_FACTOR": {
+        "type": "float",
+        "low": 1.2,
+        "high": 2.0
+      },
+      "WEIGHTED_EFFICIENCY_EXPONENT_BASE": {
+        "type": "float",
+        "low": 0.15,
+        "high": 0.6
+      },
+      "DANGER_PENALTY_MULTIPLIER": {
+        "type": "float",
+        "low": 1.0,
+        "high": 3.0
+      },
+      "NEGATIVE_EFFICIENCY_HOTFIX_BASE_SCORE": {
+        "type": "int",
+        "low": 30000,
+        "high": 80000
+      }
+    },
+    
+    "DISCARD_TILE": {
+      "YAKU_OPEN_MIN_KEEP": {
+        "type": "int",
+        "low": 1,
+        "high": 2
+      },
+      "TILE_LEFT_MAX_KEEP": {
+        "type": "int",
+        "low": 2,
+        "high": 6
+      },
+      "YAKU_OPEN_EPSILON": {
+        "type": "float",
+        "low": 0.0,
+        "high": 0.1
+      },
+      "YAKU_OPEN_RATIO_DIVISOR": {
+        "type": "float",
+        "low": 2.0,
+        "high": 5.0
+      }
+    }
+  }
+  

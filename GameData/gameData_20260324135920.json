@@ -1,0 +1,2185 @@
+{
+  "exported_at": "2026-03-24T13:59:20.880Z",
+  "total_records": 9,
+  "records": [
+    {
+      "metadata": {
+        "game_id": "20260324085913_room9",
+        "timestamp": "2026-03-24T09:28:39.672Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 1766,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          16700,
+          21900,
+          24400,
+          37000
+        ],
+        "final_ranking": [
+          4,
+          3,
+          2,
+          1
+        ],
+        "total_rounds": 8,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 3,
+          "tenpai_frequency": 0.375,
+          "tenpai_by_round": {
+            "east_round": 1,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 3,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 2.071428571428571,
+            "average_expected_han": 0.6904761904761904,
+            "min_expected_han": 0.07142857142857142,
+            "max_expected_han": 1,
+            "distribution": [
+              {
+                "han": 0.07142857142857142,
+                "count": 1
+              },
+              {
+                "han": 1,
+                "count": 2
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 1,
+          "win_frequency": 0.125,
+          "win_rate_given_tenpai": 0.3333333333333333,
+          "total_win_score": 4000,
+          "average_win_score": 4000,
+          "min_win_score": 4000,
+          "max_win_score": 4000,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 1
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 4,
+              "score": 4000,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 1,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 6,
+          "deal_in_frequency": 0.75,
+          "total_deal_in_score": 15300,
+          "average_deal_in_score": 2550,
+          "min_deal_in_score": 1000,
+          "max_deal_in_score": 5000,
+          "deal_in_details": [
+            {
+              "game_index": 1,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 2,
+              "score": 1300,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 5,
+              "score": 5000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 3000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 3000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 1,
+          "riichi_frequency_given_tenpai": 0.3333333333333333,
+          "riichi_success_rate": 1,
+          "riichi_stick_count": 1,
+          "riichi_details": [
+            {
+              "game_index": 5,
+              "round_wind": "south_round",
+              "tiles_left": 37,
+              "expected_han": 0.07142857142857142
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 3,
+          "fold_frequency": 0.375,
+          "fold_by_round": {
+            "east_round": 1,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 3,
+              "reason": "full_fold_mode",
+              "tiles_left": 27,
+              "shanten": 3
+            },
+            {
+              "game_index": 6,
+              "reason": "full_fold_mode",
+              "tiles_left": 2,
+              "shanten": 1
+            },
+            {
+              "game_index": 7,
+              "reason": "full_fold_mode",
+              "tiles_left": 39,
+              "shanten": 3
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324092936_room9",
+        "timestamp": "2026-03-24T09:52:32.639Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 1376,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          18500,
+          38200,
+          1800,
+          41500
+        ],
+        "final_ranking": [
+          3,
+          2,
+          4,
+          1
+        ],
+        "total_rounds": 7,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 3,
+          "tenpai_frequency": 0.42857142857142855,
+          "tenpai_by_round": {
+            "east_round": 1,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 3,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 1.1557158628040656,
+            "average_expected_han": 0.3852386209346885,
+            "min_expected_han": 0.022935779816513763,
+            "max_expected_han": 1,
+            "distribution": [
+              {
+                "han": 0.022935779816513763,
+                "count": 1
+              },
+              {
+                "han": 0.13278008298755187,
+                "count": 1
+              },
+              {
+                "han": 1,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 1,
+          "win_frequency": 0.14285714285714285,
+          "win_rate_given_tenpai": 0.3333333333333333,
+          "total_win_score": 2600,
+          "average_win_score": 2600,
+          "min_win_score": 2600,
+          "max_win_score": 2600,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 1
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 6,
+              "score": 2600,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 1,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 5,
+          "deal_in_frequency": 0.7142857142857143,
+          "total_deal_in_score": 9100,
+          "average_deal_in_score": 1820,
+          "min_deal_in_score": 1000,
+          "max_deal_in_score": 3000,
+          "deal_in_details": [
+            {
+              "game_index": 1,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 2,
+              "score": 3000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 4,
+              "score": 2100,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 5,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 3,
+          "riichi_frequency_given_tenpai": 1,
+          "riichi_success_rate": 0.3333333333333333,
+          "riichi_stick_count": 3,
+          "riichi_details": [
+            {
+              "game_index": 2,
+              "round_wind": "east_round",
+              "tiles_left": 42,
+              "expected_han": 0.13278008298755187
+            },
+            {
+              "game_index": 5,
+              "round_wind": "south_round",
+              "tiles_left": 55,
+              "expected_han": 1
+            },
+            {
+              "game_index": 6,
+              "round_wind": "south_round",
+              "tiles_left": 50,
+              "expected_han": 0.022935779816513763
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 3,
+          "fold_frequency": 0.42857142857142855,
+          "fold_by_round": {
+            "east_round": 3,
+            "south_round": 0,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 1,
+              "reason": "full_fold_mode",
+              "tiles_left": 21,
+              "shanten": 1
+            },
+            {
+              "game_index": 3,
+              "reason": "full_fold_mode",
+              "tiles_left": 37,
+              "shanten": 3
+            },
+            {
+              "game_index": 4,
+              "reason": "full_fold_mode",
+              "tiles_left": 36,
+              "shanten": 2
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324095336_room9",
+        "timestamp": "2026-03-24T10:27:10.547Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 2014,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          19300,
+          13000,
+          9800,
+          57900
+        ],
+        "final_ranking": [
+          2,
+          3,
+          4,
+          1
+        ],
+        "total_rounds": 8,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 4,
+          "tenpai_frequency": 0.5,
+          "tenpai_by_round": {
+            "east_round": 3,
+            "south_round": 1,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 4,
+            "open_yaku_estimate": 3
+          },
+          "expected_han_stats": {
+            "total_expected_han": 7.31976893511658,
+            "average_expected_han": 1.829942233779145,
+            "min_expected_han": 0.5806451612903226,
+            "max_expected_han": 4.201780415430267,
+            "distribution": [
+              {
+                "han": 0.5806451612903226,
+                "count": 1
+              },
+              {
+                "han": 0.9809523809523809,
+                "count": 1
+              },
+              {
+                "han": 1.556390977443609,
+                "count": 1
+              },
+              {
+                "han": 4.201780415430267,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 3,
+          "win_frequency": 0.375,
+          "win_rate_given_tenpai": 0.75,
+          "total_win_score": 17400,
+          "average_win_score": 5800,
+          "min_win_score": 1300,
+          "max_win_score": 9700,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 3
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 1,
+              "score": 6400,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 2,
+              "score": 9700,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 3,
+              "score": 1300,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 3,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 8,
+          "deal_in_frequency": 1,
+          "total_deal_in_score": 67800,
+          "average_deal_in_score": 8475,
+          "min_deal_in_score": 500,
+          "max_deal_in_score": 21300,
+          "deal_in_details": [
+            {
+              "game_index": 5,
+              "score": 500,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 5,
+              "score": 500,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 1300,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 6800,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 6800,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 11000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 19600,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 21300,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 3,
+          "riichi_frequency_given_tenpai": 0.75,
+          "riichi_success_rate": 1,
+          "riichi_stick_count": 3,
+          "riichi_details": [
+            {
+              "game_index": 2,
+              "round_wind": "east_round",
+              "tiles_left": 27,
+              "expected_han": 1.556390977443609
+            },
+            {
+              "game_index": 3,
+              "round_wind": "east_round",
+              "tiles_left": 44,
+              "expected_han": 0.5806451612903226
+            },
+            {
+              "game_index": 7,
+              "round_wind": "south_round",
+              "tiles_left": 56,
+              "expected_han": 0.9809523809523809
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 1,
+          "fold_frequency": 0.125,
+          "fold_by_round": {
+            "east_round": 0,
+            "south_round": 1,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 5,
+              "reason": "full_fold_mode",
+              "tiles_left": 36,
+              "shanten": 1
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324102805_room9",
+        "timestamp": "2026-03-24T10:57:23.328Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 1757,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          35400,
+          28200,
+          13700,
+          22700
+        ],
+        "final_ranking": [
+          1,
+          2,
+          4,
+          3
+        ],
+        "total_rounds": 8,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 2,
+          "tenpai_frequency": 0.25,
+          "tenpai_by_round": {
+            "east_round": 2,
+            "south_round": 0,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 1,
+            "open_yaku_estimate": 1
+          },
+          "expected_han_stats": {
+            "total_expected_han": 3.4921052631578946,
+            "average_expected_han": 1.7460526315789473,
+            "min_expected_han": 0,
+            "max_expected_han": 3.4921052631578946,
+            "distribution": [
+              {
+                "han": 0,
+                "count": 1
+              },
+              {
+                "han": 3.4921052631578946,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 4,
+          "win_frequency": 0.5,
+          "win_rate_given_tenpai": 2,
+          "total_win_score": 34600,
+          "average_win_score": 8650,
+          "min_win_score": 2000,
+          "max_win_score": 15300,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 2
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 2
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 1,
+              "score": 3000,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 1,
+              "score": 15300,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 1,
+              "score": 14300,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 4,
+              "score": 2000,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 4,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 5,
+          "deal_in_frequency": 0.625,
+          "total_deal_in_score": 6900,
+          "average_deal_in_score": 1380,
+          "min_deal_in_score": 1000,
+          "max_deal_in_score": 2000,
+          "deal_in_details": [
+            {
+              "game_index": 2,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 5,
+              "score": 1500,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 1400,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 2,
+          "riichi_frequency_given_tenpai": 1,
+          "riichi_success_rate": 2,
+          "riichi_stick_count": 2,
+          "riichi_details": [
+            {
+              "game_index": 1,
+              "round_wind": "east_round",
+              "tiles_left": 49,
+              "expected_han": 0
+            },
+            {
+              "game_index": 1,
+              "round_wind": "east_round",
+              "tiles_left": 45,
+              "expected_han": 1.0207715133531157
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 4,
+          "fold_frequency": 0.5,
+          "fold_by_round": {
+            "east_round": 2,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 2,
+              "reason": "full_fold_mode",
+              "tiles_left": 36,
+              "shanten": 1
+            },
+            {
+              "game_index": 3,
+              "reason": "full_fold_mode",
+              "tiles_left": 22,
+              "shanten": 2
+            },
+            {
+              "game_index": 5,
+              "reason": "full_fold_mode",
+              "tiles_left": 1,
+              "shanten": 1
+            },
+            {
+              "game_index": 7,
+              "reason": "full_fold_mode",
+              "tiles_left": 54,
+              "shanten": 3
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324110338_room9",
+        "timestamp": "2026-03-24T11:33:39.657Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 1801,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          16900,
+          36000,
+          35000,
+          11100
+        ],
+        "final_ranking": [
+          3,
+          1,
+          2,
+          4
+        ],
+        "total_rounds": 8,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 4,
+          "tenpai_frequency": 0.5,
+          "tenpai_by_round": {
+            "east_round": 2,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 3,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 3.669736124004988,
+            "average_expected_han": 0.917434031001247,
+            "min_expected_han": 0,
+            "max_expected_han": 1.3920265780730896,
+            "distribution": [
+              {
+                "han": 0,
+                "count": 1
+              },
+              {
+                "han": 0.9826275787187839,
+                "count": 1
+              },
+              {
+                "han": 1.2950819672131149,
+                "count": 1
+              },
+              {
+                "han": 1.3920265780730896,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 1,
+          "win_frequency": 0.125,
+          "win_rate_given_tenpai": 0.25,
+          "total_win_score": 3900,
+          "average_win_score": 3900,
+          "min_win_score": 3900,
+          "max_win_score": 3900,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 1
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 1,
+              "score": 3900,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 1,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 4,
+          "deal_in_frequency": 0.5,
+          "total_deal_in_score": 11000,
+          "average_deal_in_score": 2750,
+          "min_deal_in_score": 1000,
+          "max_deal_in_score": 6000,
+          "deal_in_details": [
+            {
+              "game_index": 2,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 4,
+              "score": 6000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 5,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 3,
+          "riichi_frequency_given_tenpai": 0.75,
+          "riichi_success_rate": 0.3333333333333333,
+          "riichi_stick_count": 3,
+          "riichi_details": [
+            {
+              "game_index": 1,
+              "round_wind": "east_round",
+              "tiles_left": 23,
+              "expected_han": 0.9826275787187839
+            },
+            {
+              "game_index": 5,
+              "round_wind": "south_round",
+              "tiles_left": 42,
+              "expected_han": 0
+            },
+            {
+              "game_index": 8,
+              "round_wind": "south_round",
+              "tiles_left": 40,
+              "expected_han": 1.3920265780730896
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 3,
+          "fold_frequency": 0.375,
+          "fold_by_round": {
+            "east_round": 2,
+            "south_round": 1,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 3,
+              "reason": "full_fold_mode",
+              "tiles_left": 48,
+              "shanten": 1
+            },
+            {
+              "game_index": 4,
+              "reason": "full_fold_mode",
+              "tiles_left": 26,
+              "shanten": 1
+            },
+            {
+              "game_index": 7,
+              "reason": "full_fold_mode",
+              "tiles_left": 6,
+              "shanten": 1
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324113442_room9",
+        "timestamp": "2026-03-24T12:06:09.451Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 1886,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          22500,
+          25800,
+          25500,
+          25200
+        ],
+        "final_ranking": [
+          4,
+          1,
+          2,
+          3
+        ],
+        "total_rounds": 9,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 3,
+          "tenpai_frequency": 0.3333333333333333,
+          "tenpai_by_round": {
+            "east_round": 2,
+            "south_round": 1,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 3,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 2.9578688259204142,
+            "average_expected_han": 0.9859562753068047,
+            "min_expected_han": 0.981029810298103,
+            "max_expected_han": 0.9906639004149378,
+            "distribution": [
+              {
+                "han": 0.981029810298103,
+                "count": 1
+              },
+              {
+                "han": 0.9861751152073732,
+                "count": 1
+              },
+              {
+                "han": 0.9906639004149378,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 1,
+          "win_frequency": 0.1111111111111111,
+          "win_rate_given_tenpai": 0.3333333333333333,
+          "total_win_score": 2000,
+          "average_win_score": 2000,
+          "min_win_score": 2000,
+          "max_win_score": 2000,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 1
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 8,
+              "score": 2000,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 1,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 5,
+          "deal_in_frequency": 0.5555555555555556,
+          "total_deal_in_score": 6500,
+          "average_deal_in_score": 1300,
+          "min_deal_in_score": 1000,
+          "max_deal_in_score": 2500,
+          "deal_in_details": [
+            {
+              "game_index": 1,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 1,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 2,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 2500,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 1,
+          "riichi_frequency_given_tenpai": 0.3333333333333333,
+          "riichi_success_rate": 1,
+          "riichi_stick_count": 1,
+          "riichi_details": [
+            {
+              "game_index": 2,
+              "round_wind": "east_round",
+              "tiles_left": 47,
+              "expected_han": 0.981029810298103
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 6,
+          "fold_frequency": 0.6666666666666666,
+          "fold_by_round": {
+            "east_round": 3,
+            "south_round": 2,
+            "west_round": 1,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 1,
+              "reason": "full_fold_mode",
+              "tiles_left": 40,
+              "shanten": 2
+            },
+            {
+              "game_index": 3,
+              "reason": "full_fold_mode",
+              "tiles_left": 15,
+              "shanten": 3
+            },
+            {
+              "game_index": 4,
+              "reason": "full_fold_mode",
+              "tiles_left": 14,
+              "shanten": 1
+            },
+            {
+              "game_index": 5,
+              "reason": "full_fold_mode",
+              "tiles_left": 40,
+              "shanten": 2
+            },
+            {
+              "game_index": 6,
+              "reason": "full_fold_mode",
+              "tiles_left": 40,
+              "shanten": 3
+            },
+            {
+              "game_index": 9,
+              "reason": "full_fold_mode",
+              "tiles_left": 40,
+              "shanten": 2
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324120712_room9",
+        "timestamp": "2026-03-24T12:25:07.699Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 1075,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          20900,
+          21100,
+          56700,
+          1300
+        ],
+        "final_ranking": [
+          3,
+          2,
+          1,
+          4
+        ],
+        "total_rounds": 7,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 3,
+          "tenpai_frequency": 0.42857142857142855,
+          "tenpai_by_round": {
+            "east_round": 2,
+            "south_round": 1,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 3,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 4.05578254454659,
+            "average_expected_han": 1.3519275148488632,
+            "min_expected_han": 0.020202020202020204,
+            "max_expected_han": 3.0355805243445695,
+            "distribution": [
+              {
+                "han": 0.020202020202020204,
+                "count": 1
+              },
+              {
+                "han": 1,
+                "count": 1
+              },
+              {
+                "han": 3.0355805243445695,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 1,
+          "win_frequency": 0.14285714285714285,
+          "win_rate_given_tenpai": 0.3333333333333333,
+          "total_win_score": 3900,
+          "average_win_score": 3900,
+          "min_win_score": 3900,
+          "max_win_score": 3900,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 1
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 2,
+              "score": 3900,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 1,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 3,
+          "deal_in_frequency": 0.42857142857142855,
+          "total_deal_in_score": 8000,
+          "average_deal_in_score": 2666.6666666666665,
+          "min_deal_in_score": 2000,
+          "max_deal_in_score": 4000,
+          "deal_in_details": [
+            {
+              "game_index": 1,
+              "score": 4000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 5,
+              "score": 2000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 1,
+          "riichi_frequency_given_tenpai": 0.3333333333333333,
+          "riichi_success_rate": 1,
+          "riichi_stick_count": 1,
+          "riichi_details": [
+            {
+              "game_index": 3,
+              "round_wind": "east_round",
+              "tiles_left": 41,
+              "expected_han": 0.020202020202020204
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 3,
+          "fold_frequency": 0.42857142857142855,
+          "fold_by_round": {
+            "east_round": 1,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 1,
+              "reason": "full_fold_mode",
+              "tiles_left": 26,
+              "shanten": 3
+            },
+            {
+              "game_index": 5,
+              "reason": "full_fold_mode",
+              "tiles_left": 31,
+              "shanten": 2
+            },
+            {
+              "game_index": 6,
+              "reason": "full_fold_mode",
+              "tiles_left": 11,
+              "shanten": 1
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324122618_room9",
+        "timestamp": "2026-03-24T13:08:20.317Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 2521,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          13600,
+          15900,
+          37600,
+          31900
+        ],
+        "final_ranking": [
+          4,
+          3,
+          1,
+          2
+        ],
+        "total_rounds": 8,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 4,
+          "tenpai_frequency": 0.5,
+          "tenpai_by_round": {
+            "east_round": 2,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 3,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 5.365612100852948,
+            "average_expected_han": 1.341403025213237,
+            "min_expected_han": 0,
+            "max_expected_han": 4.23469387755102,
+            "distribution": [
+              {
+                "han": 0,
+                "count": 1
+              },
+              {
+                "han": 0.0927710843373494,
+                "count": 1
+              },
+              {
+                "han": 1.0381471389645776,
+                "count": 1
+              },
+              {
+                "han": 4.23469387755102,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 3,
+          "win_frequency": 0.375,
+          "win_rate_given_tenpai": 0.75,
+          "total_win_score": 5800,
+          "average_win_score": 1933.3333333333333,
+          "min_win_score": 500,
+          "max_win_score": 3300,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 3
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 1,
+              "score": 3300,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 3,
+              "score": 500,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 5,
+              "score": 2000,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 3,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 4,
+          "deal_in_frequency": 0.5,
+          "total_deal_in_score": 15700,
+          "average_deal_in_score": 3925,
+          "min_deal_in_score": 3000,
+          "max_deal_in_score": 5200,
+          "deal_in_details": [
+            {
+              "game_index": 2,
+              "score": 5200,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 3600,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 3900,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 8,
+              "score": 3000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 2,
+          "riichi_frequency_given_tenpai": 0.5,
+          "riichi_success_rate": 1.5,
+          "riichi_stick_count": 2,
+          "riichi_details": [
+            {
+              "game_index": 3,
+              "round_wind": "east_round",
+              "tiles_left": 38,
+              "expected_han": 0.0927710843373494
+            },
+            {
+              "game_index": 8,
+              "round_wind": "south_round",
+              "tiles_left": 23,
+              "expected_han": 0
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 4,
+          "fold_frequency": 0.5,
+          "fold_by_round": {
+            "east_round": 2,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 1,
+              "reason": "full_fold_mode",
+              "tiles_left": 19,
+              "shanten": 1
+            },
+            {
+              "game_index": 4,
+              "reason": "full_fold_mode",
+              "tiles_left": 42,
+              "shanten": 3
+            },
+            {
+              "game_index": 6,
+              "reason": "full_fold_mode",
+              "tiles_left": 32,
+              "shanten": 2
+            },
+            {
+              "game_index": 8,
+              "reason": "full_fold_mode",
+              "tiles_left": 7,
+              "shanten": 1
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    },
+    {
+      "metadata": {
+        "game_id": "20260324130928_room9",
+        "timestamp": "2026-03-24T13:56:02.804Z",
+        "room_info": {
+          "room_type": "未知房间",
+          "game_mode": "四人南",
+          "room_id": 9,
+          "room_name": "未知房间 (四人南)",
+          "client_language": "unknown"
+        },
+        "duration_seconds": 2794,
+        "ai_parameters": {
+          "hand_evaluation": {
+            "efficiency": 1,
+            "safety": 1,
+            "sakigiri": 1
+          },
+          "strategy": {
+            "riichi": 1,
+            "chiitoitsu": 5,
+            "thirteen_orphans": 10
+          },
+          "performance_mode": 3
+        },
+        "save_reason": "end_screen_autorun"
+      },
+      "overall_statistics": {
+        "final_scores": [
+          5400,
+          6500,
+          41900,
+          45200
+        ],
+        "final_ranking": [
+          4,
+          3,
+          2,
+          1
+        ],
+        "total_rounds": 8,
+        "tenpai_stats": {
+          "total_tenpai_occurrences": 4,
+          "tenpai_frequency": 0.5,
+          "tenpai_by_round": {
+            "east_round": 3,
+            "south_round": 1,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "tenpai_yaku_distribution": {
+            "closed_yaku_estimate": 4,
+            "open_yaku_estimate": 2
+          },
+          "expected_han_stats": {
+            "total_expected_han": 2.1804553120672745,
+            "average_expected_han": 0.5451138280168186,
+            "min_expected_han": 0.04011461318051576,
+            "max_expected_han": 1.0235849056603774,
+            "distribution": [
+              {
+                "han": 0.04011461318051576,
+                "count": 1
+              },
+              {
+                "han": 0.0946969696969697,
+                "count": 1
+              },
+              {
+                "han": 1.0220588235294117,
+                "count": 1
+              },
+              {
+                "han": 1.0235849056603774,
+                "count": 1
+              }
+            ]
+          }
+        },
+        "win_stats": {
+          "total_wins": 2,
+          "win_frequency": 0.25,
+          "win_rate_given_tenpai": 0.5,
+          "total_win_score": 9500,
+          "average_win_score": 4750,
+          "min_win_score": 500,
+          "max_win_score": 9000,
+          "win_score_distribution": [
+            {
+              "score_range": "<10000",
+              "count": 2
+            },
+            {
+              "score_range": "10000-20000",
+              "count": 0
+            },
+            {
+              "score_range": ">20000",
+              "count": 0
+            }
+          ],
+          "win_yaku_details": [
+            {
+              "game_index": 1,
+              "score": 500,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            },
+            {
+              "game_index": 5,
+              "score": 9000,
+              "win_type": "unknown",
+              "yaku_list": [],
+              "total_han": null,
+              "fu": null,
+              "dora_count": 0,
+              "ura_dora_count": null
+            }
+          ],
+          "dora_stats": {
+            "total_dora_in_wins": 0,
+            "average_dora_per_win": 0,
+            "dora_frequency": 0,
+            "dora_distribution": {
+              "0_dora": 2,
+              "1_dora": 0,
+              "2_dora": 0,
+              "3+_dora": 0
+            }
+          }
+        },
+        "deal_in_stats": {
+          "total_deal_ins": 13,
+          "deal_in_frequency": 1.625,
+          "total_deal_in_score": 61200,
+          "average_deal_in_score": 4707.692307692308,
+          "min_deal_in_score": 1000,
+          "max_deal_in_score": 11800,
+          "deal_in_details": [
+            {
+              "game_index": 1,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 1,
+              "score": 1000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 2,
+              "score": 1500,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 2100,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 9500,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 3,
+              "score": 11800,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 4,
+              "score": 1300,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 4000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 4000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 4000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 6,
+              "score": 4000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 8000,
+              "to_player": null,
+              "yaku": []
+            },
+            {
+              "game_index": 7,
+              "score": 9000,
+              "to_player": null,
+              "yaku": []
+            }
+          ]
+        },
+        "riichi_stats": {
+          "total_riichi_calls": 4,
+          "riichi_frequency_given_tenpai": 1,
+          "riichi_success_rate": 0.5,
+          "riichi_stick_count": 4,
+          "riichi_details": [
+            {
+              "game_index": 1,
+              "round_wind": "east_round",
+              "tiles_left": 46,
+              "expected_han": 1.0235849056603774
+            },
+            {
+              "game_index": 3,
+              "round_wind": "east_round",
+              "tiles_left": 12,
+              "expected_han": 0.0946969696969697
+            },
+            {
+              "game_index": 4,
+              "round_wind": "east_round",
+              "tiles_left": 53,
+              "expected_han": 0.04011461318051576
+            },
+            {
+              "game_index": 5,
+              "round_wind": "south_round",
+              "tiles_left": 24,
+              "expected_han": 1.0220588235294117
+            }
+          ]
+        },
+        "fold_stats": {
+          "total_fold_occurrences": 4,
+          "fold_frequency": 0.5,
+          "fold_by_round": {
+            "east_round": 2,
+            "south_round": 2,
+            "west_round": 0,
+            "north_round": 0
+          },
+          "fold_details": [
+            {
+              "game_index": 1,
+              "reason": "full_fold_mode",
+              "tiles_left": 14,
+              "shanten": 2
+            },
+            {
+              "game_index": 2,
+              "reason": "full_fold_mode",
+              "tiles_left": 55,
+              "shanten": 3
+            },
+            {
+              "game_index": 6,
+              "reason": "full_fold_mode",
+              "tiles_left": 32,
+              "shanten": 1
+            },
+            {
+              "game_index": 7,
+              "reason": "full_fold_mode",
+              "tiles_left": 12,
+              "shanten": 2
+            }
+          ]
+        },
+        "efficiency_stats": {
+          "average_shanten_improvement_per_discard": null,
+          "average_efficiency_score": null,
+          "calls_made": {
+            "pon": null,
+            "chi": null,
+            "kan": null
+          },
+          "call_success_rate": null
+        }
+      }
+    }
+  ]
+}
