@@ -8,6 +8,7 @@
 - 自动采集并导出对局统计数据（gameData）
 - 通过高斯过程回归（GPR）贝叶斯优化器生成下一组参数
 - 人工导入新参数后继续迭代优化
+- 使用F12查看具体参数（AI的逻辑还是蛮变态的）
 
 ---
 
@@ -37,17 +38,21 @@ pip install numpy scipy scikit-learn
 ## 日常使用流程（推荐）
 
 1. **加载脚本**
+   
    - 将 `DoJot_1.0.0.user.js` 导入用户脚本管理器并启用
 
 2. **导入参数**
+   
    - 在脚本界面导入 `Parameter/defaultParameter.importable.json`
    - 或导入上一次优化输出的参数文件
 
 3. **运行对局并收集数据**
+   
    - 正常自动对局
    - 脚本会持续记录每场大局统计（本地存储）
 
 4. **导出 gameData**
+   
    - 导出到 `GameData/` 目录（示例：`gameData_YYYYMMDDHHmmss.json`）
 
 5. **运行优化器**
@@ -57,10 +62,12 @@ python Optimizer/BayesianOptimizer.py --game-data GameData/gameData_你的时间
 ```
 
 6. **获取新参数**
+   
    - 生成文件：`Optimizer/suggestedParameter.importable.json`
    - 在脚本中手动导入该文件继续下一轮对局
 
 7. **循环迭代**
+   
    - 重复“对局 -> 导出 -> 优化 -> 导入”流程
 
 ---
@@ -110,3 +117,67 @@ python Optimizer/BayesianOptimizer.py ^
 
 - 项目名：`DoJot`
 - 项目版本：`1.0.0`
+
+----
+
+## 效果展示
+
+### 最有定力的兜牌
+
+因为在金之间训练的，金之间最大的特点就是2位加分非常多，3位扣分非常少，总而言之，只要不是4位，一直打下去都是能上分的。
+
+所以为了不掉到4位，兜牌的权重训练以后变的相当高。
+
+比较有代表性的一把：末巡拒听两次一气通贯
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\noTen1.png)
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\noTen2.png)
+
+看看总牌河
+
+![](C:\Users\25293\AppData\Roaming\marktext\images\2026-03-24-23-10-04-image.png)
+
+这是因为我的防守逻辑是选择一名玩家统计其危险值，在认为某个玩家非常危险的时候相当于根据他的牌河单防他。只会打他打过的现物。
+
+来看看日志：
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\bad3m.png)
+
+日志里面没有3m 5p，认为这都是危险牌/高价值牌，尽可能不要打出去。
+
+太能兜了我天哪，有这个定力做什么都会成功的（
+
+### 非常高牌效的切牌
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\45779-45579.png)
+
+一个简单的例子：45779->45579
+
+确实牌效高，确实如果自己打就会顺手打5m，甚至为了碰牌多一点会打9m，如果那么打后面很不舒服了
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\ron.png)
+
+当然这把奶奶发牌也没有什么影响（
+
+## 一些特殊役种的危险系数很高
+
+比如说大四喜，小四喜，大三元，清一色，混一色，字一色
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\dangerousMeld.png)
+
+上家保底混一色自风场风四番满贯，不能点，放铳的输分期望太高了
+
+兜了好久好久的西风北风，这时候AI已经弃胡了，最后没有点炮也算胜利。
+
+### AI打了4天麻将的结果
+
+用AI收集数据打了4天麻将
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\result2.png)
+
+![](D:\LEARNING_RESOURCE\Odds_and_Ends\Mahjong\DoJot-Mahjong-script\Example\result1.png)
+
+四麻段位从雀杰1星200分到三星1361分，感觉再挂一晚上能上雀豪啊。
+
+事已至此，先发布吧。
