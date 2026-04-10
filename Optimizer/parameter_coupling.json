@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "description": "贝叶斯优化候选点生成时的参数块：同块内使用相关扰动，减轻 SAFETY×DANGER×SAFETY_FACTOR 等乘法耦合导致的非物理组合。未出现在任何块中的参数在加载时会自动视为独立维度。",
+  "groups": [
+    {
+      "id": "hand_evaluation",
+      "note": "进入 calculateTilePriority 的 eff / 危险惩罚 / 先切，强耦合",
+      "params": [
+        "HAND_EVALUATION.EFFICIENCY",
+        "HAND_EVALUATION.SAFETY",
+        "HAND_EVALUATION.SAKIGIRI"
+      ]
+    },
+    {
+      "id": "tile_priority_formula",
+      "note": "priority 公式内效率指数与危险扣分",
+      "params": [
+        "TILE_PRIORITY.FIRST_PLACE_LAST_GAME_FACTOR",
+        "TILE_PRIORITY.WEIGHTED_EFFICIENCY_EXPONENT_BASE",
+        "TILE_PRIORITY.DANGER_PENALTY_MULTIPLIER",
+        "TILE_PRIORITY.NEGATIVE_EFFICIENCY_HOTFIX_BASE_SCORE"
+      ]
+    },
+    {
+      "id": "push_fold_pressure",
+      "note": "getFoldThreshold / 全场危险与 fold 倾向",
+      "params": [
+        "PUSH_FOLD.OPEN_FACTOR",
+        "PUSH_FOLD.TENPAI_DIVISOR",
+        "PUSH_FOLD.ISHANTEN_DIVISOR",
+        "PUSH_FOLD.ISDANGER_CRITICAL",
+        "PUSH_FOLD.DANGER_CRITICAL",
+        "PUSH_FOLD.DEALER_FACTOR",
+        "PUSH_FOLD.ALLLAST_LASTONE_FACTOR",
+        "PUSH_FOLD.SAFETY_FACTOR",
+        "PUSH_FOLD.FOLD_BASE_VALUE",
+        "PUSH_FOLD.LESS_SAFE_TILE_FACTOR",
+        "PUSH_FOLD.LESS_TILE_FACTOR"
+      ]
+    },
+    {
+      "id": "fold_threshold_table",
+      "note": "FOLD_THRESHOLD 整表共同决定阈值曲线",
+      "params": [
+        "FOLD_THRESHOLD.TILES_LEFT_NO_TEN_THRESHOLD",
+        "FOLD_THRESHOLD.NO_TEN_PENALTY_BASE",
+        "FOLD_THRESHOLD.NO_TEN_PENALTY_DIVISOR",
+        "FOLD_THRESHOLD.NO_TEN_PENALTY_STEP",
+        "FOLD_THRESHOLD.SHAPE_CLAMP_MIN",
+        "FOLD_THRESHOLD.SHAPE_CLAMP_MAX",
+        "FOLD_THRESHOLD.FOLD_VALUE_SHANTEN_EFF_MULTIPLIER",
+        "FOLD_THRESHOLD.FOLD_VALUE_DIVISOR",
+        "FOLD_THRESHOLD.GET_DISTANCE_TO_FIRST_DIVISOR",
+        "FOLD_THRESHOLD.GET_DISTANCE_TO_FIRST_FLOOR",
+        "FOLD_THRESHOLD.WALL_ADJUST_BASE",
+        "FOLD_THRESHOLD.WALL_SIZE_HALF_DIVISOR",
+        "FOLD_THRESHOLD.WALL_SIZE_DOUBLE_DIVISOR",
+        "FOLD_THRESHOLD.SAFE_TILES_ADJUST_BASE",
+        "FOLD_THRESHOLD.SAFE_TILES_CENTER",
+        "FOLD_THRESHOLD.SAFE_TILES_DIVISOR",
+        "FOLD_THRESHOLD.HAND_LENGTH_BASE_FACTOR",
+        "FOLD_THRESHOLD.HAND_LENGTH_DIVISOR",
+        "FOLD_THRESHOLD.FOLD_VALUE_DECIMALS"
+      ]
+    },
+    {
+      "id": "discard_fold_execution",
+      "note": "discardFold 混合/全弃与副露保役",
+      "params": [
+        "DISCARD_FOLD.SAME_SHANTEN_DANGER_TOLERANCE_MULTIPLIER",
+        "DISCARD_FOLD.FOLD_THRESHOLD_DANGER_MULTIPLIER",
+        "DISCARD_TILE.YAKU_OPEN_MIN_KEEP",
+        "DISCARD_TILE.TILE_LEFT_MAX_KEEP",
+        "DISCARD_TILE.YAKU_OPEN_EPSILON",
+        "DISCARD_TILE.YAKU_OPEN_RATIO_DIVISOR"
+      ]
+    },
+    {
+      "id": "riichi_decision_lane",
+      "note": "STRATEGY.RIICHI 与 shouldRiichi 阈值同一决策链",
+      "params": [
+        "STRATEGY.RIICHI",
+        "RIICHI_DECISION.BAD_WAIT_BASE",
+        "RIICHI_DECISION.BAD_WAIT_BASE_CHIITOITSU",
+        "RIICHI_DECISION.NO_WAIT_MAX",
+        "RIICHI_DECISION.TILES_LEFT_CLOSE_TO_END_BASE",
+        "RIICHI_DECISION.HUGE_LEAD_DISTANCE_TO_FIRST",
+        "RIICHI_DECISION.FIRST_PLACE_DISTANCE_TO_FIRST_MAX",
+        "RIICHI_DECISION.RIICHI_DANGER_SCORE_OFFSET",
+        "RIICHI_DECISION.ENOUGH_YAKU_MIN_CLOSED",
+        "RIICHI_DECISION.DEALER_SCORE_DIVISOR",
+        "RIICHI_DECISION.ENOUGH_YAKU_HAND_SCORE_BASE",
+        "RIICHI_DECISION.YAKU_WAIT_SCORE_MULTIPLIER",
+        "RIICHI_DECISION.HIGH_VALUE_NO_YAKU_MIN_CLOSED",
+        "RIICHI_DECISION.HIGH_VALUE_NO_YAKU_HAND_SCORE_BASE",
+        "RIICHI_DECISION.LOTS_OF_DORA_INDICATORS_MIN_COUNT",
+        "RIICHI_DECISION.NOT_DEALER_WORTHLESS_HAND_SCORE_BASE",
+        "RIICHI_DECISION.SHAPE_THRESHOLD",
+        "RIICHI_DECISION.LAST_GAME_DISTANCE_TO_NEXT_MIN",
+        "RIICHI_DECISION.LAST_GAME_DISTANCE_TO_NEXT_MAX"
+      ]
+    },
+    {
+      "id": "call_melds",
+      "note": "吃碰杠侵略性",
+      "params": [
+        "CALL.CALL_PON_CHI",
+        "CALL.CALL_KAN"
+      ]
+    },
+    {
+      "id": "strategy_shape",
+      "note": "七对国士等路线切换（与立直块独立）",
+      "params": [
+        "STRATEGY.CHIITOITSU",
+        "STRATEGY.THIRTEEN_ORPHANS",
+        "STRATEGY.KEEP_SAFETILE"
+      ]
+    },
+    {
+      "id": "wait_quality_danger",
+      "note": "听牌质量与危险估算共用 WAIT_QUALITY",
+      "params": [
+        "WAIT_QUALITY.BASE_QUALITY",
+        "WAIT_QUALITY.MIN_QUALITY",
+        "WAIT_QUALITY.DEAL_IN_CHANCE_MULTIPLIER"
+      ]
+    },
+    {
+      "id": "honor_retention_defense",
+      "note": "字牌估值、留牌、读筋等防守侧",
+      "params": [
+        "HONOR_BALANCE.HONOR_BASE_DANGER_MULTIPLIER",
+        "HONOR_BALANCE.HONOR_OTHER_HONITSU_SCALING",
+        "HONOR_BALANCE.YAKUHAI_VALUE_MULTIPLIER",
+        "HONOR_BALANCE.YAKUHAI_OPPONENT_VALUE_MULTIPLIER",
+        "TILE_HOLDING.ENABLED",
+        "TILE_HOLDING.RETENTION_MAX_SHANTEN",
+        "TILE_HOLDING.RETENTION_BASELINE_QUALITY",
+        "TILE_HOLDING.RETENTION_PRIORITY_PENALTY",
+        "TILE_HOLDING.RETENTION_TIE_BREAK_GAP",
+        "ADVANCED_DEFENSE.ENABLED",
+        "ADVANCED_DEFENSE.SUJI_ONE_SIDE_MULTIPLIER",
+        "ADVANCED_DEFENSE.SUJI_BOTH_SIDE_MULTIPLIER",
+        "ADVANCED_DEFENSE.EARLY_DISCARD_MAX_COUNT",
+        "ADVANCED_DEFENSE.EARLY_EXACT_MULTIPLIER",
+        "ADVANCED_DEFENSE.EARLY_NEAR_MULTIPLIER",
+        "ADVANCED_DEFENSE.EARLY_EDGE_PATTERN_MULTIPLIER",
+        "ADVANCED_DEFENSE.WALL_NEAR_DEAD_MULTIPLIER",
+        "ADVANCED_DEFENSE.WALL_DOUBLE_DEAD_MULTIPLIER",
+        "ADVANCED_DEFENSE.DANGER_FLOOR"
+      ]
+    },
+    {
+      "id": "misc_ui",
+      "note": "与牌效弱相关，独立扰动即可",
+      "params": [
+        "PERFORMANCE_MODE",
+        "MISC.LOG_AMOUNT",
+        "MISC.DEBUG_BUTTON",
+        "MISC.USE_EMOJI",
+        "MISC.CHANGE_RECOMMEND_TILE_COLOR"
+      ]
+    }
+  ]
+}

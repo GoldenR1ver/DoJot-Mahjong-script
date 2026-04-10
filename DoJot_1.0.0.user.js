@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DoJot
 // @namespace    dojot
-// @version      1.0.0
+// @version      1.2.1
 // @description  A Mahjong Soul Bot.
 // @author       GoldenRiver
 // @match        https://mahjongsoul.game.yo-star.com/*
@@ -21,7 +21,7 @@
 // 2) 下面原本使用的全局变量（如 PERFORMANCE_MODE/EFFICIENCY/SAFETY 等）仍保留，但它们的默认值改为从本配置读取，方便你只改一处。
 const DoJot_1_0_0_PARAMS = {
 	// @DoJot_1.0.0.user.js (20-48) PARAMETERS (top section)
-	PERFORMANCE_MODE: 3, // 性能模式：越高计算越精细但更耗时；建议范围 0-4
+	PERFORMANCE_MODE: 4, // 性能模式：越高计算越精细但更耗时；建议范围 0-4
 
 	HAND_EVALUATION: { // @DoJot_1.0.0.user.js (28-32)
 		EFFICIENCY: 1.0, // 进攻效率权重：越高越重速度/和牌率；建议范围 0.6-1.8
@@ -45,7 +45,9 @@ const DoJot_1_0_0_PARAMS = {
 		LOG_AMOUNT: 3, // 日志条数：越大输出越多；建议范围 0-20（整数）
 		DEBUG_BUTTON: false, // 是否显示调试按钮；可选 true/false
 		USE_EMOJI: true, // 是否用emoji显示牌；可选 true/false
-		CHANGE_RECOMMEND_TILE_COLOR: true // 是否高亮推荐牌颜色；可选 true/false
+		CHANGE_RECOMMEND_TILE_COLOR: true, // 是否高亮推荐牌颜色；可选 true/false
+		// true：Autostart 下拉里列出 cfg.desktop.matchmode 中所有 is_open 的场次（含活动/修罗等）；false：沿用旧逻辑（段位可进且 mode≠0）
+		AUTOSTART_LIST_ALL_OPEN_MATCHMODES: true
 	},
 
 	// @DoJot_1.0.0.user.js (1224-1232) getWaitQuality
@@ -127,7 +129,12 @@ const DoJot_1_0_0_PARAMS = {
 		SHAPE_THRESHOLD: 0.4, // 牌型质量门槛；越高越严格；建议范围 0.2-0.8
 
 		LAST_GAME_DISTANCE_TO_NEXT_MIN: -1000, // 末局位次接近下家时拒立直下界；建议范围 -3000~-500
-		LAST_GAME_DISTANCE_TO_NEXT_MAX: 0 // 末局位次接近下家时拒立直上界；建议范围 -500~1000
+		LAST_GAME_DISTANCE_TO_NEXT_MAX: 0, // 末局位次接近下家时拒立直上界；建议范围 -500~1000
+
+		// 早巡（手牌总危险度未达阈值）+ 听牌剩余枚数少 + 已有役 → 默听改良（不立直）
+		DAMATEN_WAIT_TILES_REMAINING_MAX: 3, // 听牌剩余枚数 < 该值时视为枚数过少；建议范围 2-6（整数）
+		DAMATEN_EARLY_HAND_DANGER_THRESHOLD: 60, // 手牌各张危险度之和 ≥ 该值时视为早巡结束；建议范围 35-100
+		DAMATEN_HAS_YAKU_MIN_CLOSED: 1 // 触发默听所需最低门清期望役数；建议范围 0.5-2
 	},
 
 	// @DoJot_1.0.0.user.js (2570-2598) discardFold 魔法数字
@@ -150,6 +157,35 @@ const DoJot_1_0_0_PARAMS = {
 		TILE_LEFT_MAX_KEEP: 4, // 末盘直接出推荐牌阈值；建议范围 2-6
 		YAKU_OPEN_EPSILON: 0.01, // 役种比较容差，防止浮点误差；建议范围 0-0.1
 		YAKU_OPEN_RATIO_DIVISOR: 3.5 // 役值相对比较分母；越小越重视役；建议范围 2.0-5.0
+	},
+
+	ADVANCED_DEFENSE: {
+		ENABLED: true, // 是否启用进阶防守估算
+		SUJI_ONE_SIDE_MULTIPLIER: 0.9, // 单边筋牌减危险
+		SUJI_BOTH_SIDE_MULTIPLIER: 0.75, // 双边筋牌减危险
+		EARLY_DISCARD_MAX_COUNT: 6, // 早巡判定使用的牌河张数
+		EARLY_EXACT_MULTIPLIER: 0.9, // 早巡已现同牌时危险修正
+		EARLY_NEAR_MULTIPLIER: 0.96, // 早巡附近牌（相邻）危险修正
+		EARLY_EDGE_PATTERN_MULTIPLIER: 0.88, // 早巡2/3/7/8对边张形修正
+		WALL_NEAR_DEAD_MULTIPLIER: 0.9, // 相邻相关牌绝张时危险修正
+		WALL_DOUBLE_DEAD_MULTIPLIER: 0.8, // 两侧都绝张时危险修正
+		DANGER_FLOOR: 5 // 危险度最小值
+	},
+
+	TILE_HOLDING: {
+		ENABLED: true, // 是否启用留牌偏好
+		RETENTION_MAX_SHANTEN: 1, // 仅在 <= 该向听数时介入留牌
+		RETENTION_BASELINE_QUALITY: 1.0, // 听口质量基准（高于该值更值得留）
+		RETENTION_PRIORITY_PENALTY: 18, // 高留牌价值牌被切时的优先级惩罚
+		RETENTION_TIE_BREAK_GAP: 120 // 优先级接近时按留牌价值二次排序
+	},
+
+	// Reduce overweighting of honor tiles (danger/value).
+	HONOR_BALANCE: {
+		HONOR_BASE_DANGER_MULTIPLIER: 1.12, // 字牌基础危险倍率（原逻辑约 1.30）
+		HONOR_OTHER_HONITSU_SCALING: 0.6, // 他家他色混一时，字牌附加危险缩放系数
+		YAKUHAI_VALUE_MULTIPLIER: 0.75, // 自家役牌价值缩放（降低字牌价值偏置）
+		YAKUHAI_OPPONENT_VALUE_MULTIPLIER: 0.75 // 对手役牌估值缩放（降低字牌危险估值偏置）
 	}
 };
 
@@ -184,6 +220,9 @@ var LOG_AMOUNT = DoJot_1_0_0_PARAMS.MISC.LOG_AMOUNT; //Amount of Messages to log
 var DEBUG_BUTTON = DoJot_1_0_0_PARAMS.MISC.DEBUG_BUTTON; //Display a Debug Button in the GUI
 var USE_EMOJI = DoJot_1_0_0_PARAMS.MISC.USE_EMOJI; //use EMOJI to show tile
 var CHANGE_RECOMMEND_TILE_COLOR = DoJot_1_0_0_PARAMS.MISC.CHANGE_RECOMMEND_TILE_COLOR; // change current recommend tile color
+var AUTOSTART_LIST_ALL_OPEN_MATCHMODES = typeof DoJot_1_0_0_PARAMS.MISC.AUTOSTART_LIST_ALL_OPEN_MATCHMODES === "boolean"
+	? DoJot_1_0_0_PARAMS.MISC.AUTOSTART_LIST_ALL_OPEN_MATCHMODES
+	: true;
 
 const PARAM_CONFIG_STORAGE_KEY = "dojotParamConfig";
 
@@ -195,6 +234,62 @@ const RIICHI_DECISION_PARAMS = DoJot_1_0_0_PARAMS.RIICHI_DECISION;
 const DISCARD_FOLD_PARAMS = DoJot_1_0_0_PARAMS.DISCARD_FOLD;
 const TILE_PRIORITY_PARAMS = DoJot_1_0_0_PARAMS.TILE_PRIORITY;
 const DISCARD_TILE_PARAMS = DoJot_1_0_0_PARAMS.DISCARD_TILE;
+const ADVANCED_DEFENSE_PARAMS = DoJot_1_0_0_PARAMS.ADVANCED_DEFENSE;
+const TILE_HOLDING_PARAMS = DoJot_1_0_0_PARAMS.TILE_HOLDING;
+const HONOR_BALANCE_PARAMS = DoJot_1_0_0_PARAMS.HONOR_BALANCE;
+
+function mapLegacyFlatParamsToNested(legacyFlatParams) {
+	if (typeof legacyFlatParams !== "object" || legacyFlatParams === null) {
+		return {};
+	}
+	var mapped = {};
+	var leafMap = {
+		EFFICIENCY: ["HAND_EVALUATION", "EFFICIENCY"],
+		SAFETY: ["HAND_EVALUATION", "SAFETY"],
+		SAKIGIRI: ["HAND_EVALUATION", "SAKIGIRI"],
+		CALL_PON_CHI: ["CALL", "CALL_PON_CHI"],
+		CALL_KAN: ["CALL", "CALL_KAN"],
+		RIICHI: ["STRATEGY", "RIICHI"],
+		CHIITOITSU: ["STRATEGY", "CHIITOITSU"],
+		THIRTEEN_ORPHANS: ["STRATEGY", "THIRTEEN_ORPHANS"],
+		KEEP_SAFETILE: ["STRATEGY", "KEEP_SAFETILE"],
+		LOG_AMOUNT: ["MISC", "LOG_AMOUNT"],
+		DEBUG_BUTTON: ["MISC", "DEBUG_BUTTON"],
+		USE_EMOJI: ["MISC", "USE_EMOJI"],
+		CHANGE_RECOMMEND_TILE_COLOR: ["MISC", "CHANGE_RECOMMEND_TILE_COLOR"],
+		AUTOSTART_LIST_ALL_OPEN_MATCHMODES: ["MISC", "AUTOSTART_LIST_ALL_OPEN_MATCHMODES"]
+	};
+	Object.keys(leafMap).forEach(function (flatKey) {
+		if (!Object.prototype.hasOwnProperty.call(legacyFlatParams, flatKey)) {
+			return;
+		}
+		var path = leafMap[flatKey];
+		var cursor = mapped;
+		for (var i = 0; i < path.length - 1; i++) {
+			if (typeof cursor[path[i]] !== "object" || cursor[path[i]] === null) {
+				cursor[path[i]] = {};
+			}
+			cursor = cursor[path[i]];
+		}
+		cursor[path[path.length - 1]] = legacyFlatParams[flatKey];
+	});
+	return mapped;
+}
+
+function normalizeIncomingParams(incomingParams) {
+	var normalized = {};
+	if (typeof incomingParams === "object" && incomingParams !== null) {
+		Object.assign(normalized, incomingParams);
+		var legacyMapped = mapLegacyFlatParamsToNested(incomingParams);
+		Object.keys(legacyMapped).forEach(function (groupKey) {
+			if (typeof normalized[groupKey] !== "object" || normalized[groupKey] === null) {
+				normalized[groupKey] = {};
+			}
+			Object.assign(normalized[groupKey], legacyMapped[groupKey]);
+		});
+	}
+	return normalized;
+}
 
 function syncLegacyParameterVariables() {
 	PERFORMANCE_MODE = DoJot_1_0_0_PARAMS.PERFORMANCE_MODE;
@@ -215,6 +310,9 @@ function syncLegacyParameterVariables() {
 	DEBUG_BUTTON = DoJot_1_0_0_PARAMS.MISC.DEBUG_BUTTON;
 	USE_EMOJI = DoJot_1_0_0_PARAMS.MISC.USE_EMOJI;
 	CHANGE_RECOMMEND_TILE_COLOR = DoJot_1_0_0_PARAMS.MISC.CHANGE_RECOMMEND_TILE_COLOR;
+	AUTOSTART_LIST_ALL_OPEN_MATCHMODES = typeof DoJot_1_0_0_PARAMS.MISC.AUTOSTART_LIST_ALL_OPEN_MATCHMODES === "boolean"
+		? DoJot_1_0_0_PARAMS.MISC.AUTOSTART_LIST_ALL_OPEN_MATCHMODES
+		: true;
 }
 
 function cloneCurrentParams() {
@@ -302,13 +400,14 @@ function persistParamsToStorage() {
 }
 
 function applyLoadedParams(incomingParams, showMessage = true, persist = true) {
-	mergeParamsInPlace(DoJot_1_0_0_PARAMS, incomingParams);
+	var normalizedIncomingParams = normalizeIncomingParams(incomingParams);
+	mergeParamsInPlace(DoJot_1_0_0_PARAMS, normalizedIncomingParams);
 	syncLegacyParameterVariables();
 	if (persist) {
 		persistParamsToStorage();
 	}
 	if (showMessage) {
-		showCrtActionMsg("参数配置已加载。");
+		showCrtActionMsg("参数配置已加载。PERFORMANCE_MODE=" + DoJot_1_0_0_PARAMS.PERFORMANCE_MODE);
 	}
 }
 
@@ -331,12 +430,13 @@ function exportParamsToJsonFile() {
 		var blob = new Blob([JSON.stringify(cloneCurrentParams(), null, 2)], { type: "application/json" });
 		var a = document.createElement("a");
 		a.href = URL.createObjectURL(blob);
-		a.download = "DoJot_params.json";
+		var timestamp = new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
+		a.download = "DoJot_params_" + timestamp + ".json";
 		document.body.appendChild(a);
 		a.click();
 		a.remove();
 		URL.revokeObjectURL(a.href);
-		showCrtActionMsg("参数已导出为 DoJot_params.json");
+		showCrtActionMsg("参数已导出。PERFORMANCE_MODE=" + DoJot_1_0_0_PARAMS.PERFORMANCE_MODE);
 	}
 	catch (e) {
 		showCrtActionMsg("参数导出失败。");
@@ -644,6 +744,9 @@ function aiModeChange() {
 	MODE = parseInt(aimodeCombobox.value);
 
 	setAutoCallWin(MODE === AIMODE.AUTO);
+	if (MODE !== AIMODE.HELP) {
+		hideHelpTileParamsPanel();
+	}
 }
 
 function roomChange() {
@@ -698,18 +801,65 @@ function refreshDataMode() {
 	dataModeCombobox.value = DATA_COLLECTION_MODE;
 }
 
-// Refresh the contents of the Room Selection Combobox with values appropiate for the rank
+function isMatchmodeRowOpen(room) {
+	return room && (room.is_open === 1 || room.is_open === true);
+}
+
+// Refresh the contents of the Room Selection Combobox from cfg.desktop.matchmode
 function refreshRoomSelection() {
-	roomCombobox.innerHTML = ""; // Clear old entries
-	getRooms().forEach(function (room) {
-		if (isInRank(room.id) && room.mode != 0) { // Rooms with mode = 0 are 1 Game only, not sure why they are in the code but not selectable in the UI...
-			var option = document.createElement("option");
-			option.text = getRoomName(room);
-			option.value = room.id;
-			roomCombobox.appendChild(option);
+	roomCombobox.innerHTML = "";
+	var roomsTable = getRooms();
+	if (!roomsTable) {
+		return;
+	}
+	var candidates = [];
+	roomsTable.forEach(function (room) {
+		if (!room || room.id == null) {
+			return;
+		}
+		var include = false;
+		if (AUTOSTART_LIST_ALL_OPEN_MATCHMODES) {
+			include = isMatchmodeRowOpen(room);
+		}
+		else {
+			include = isInRank(room.id) && room.mode != 0;
+		}
+		if (include) {
+			candidates.push(room);
 		}
 	});
-	roomCombobox.value = ROOM;
+	candidates.sort(function (a, b) {
+		return a.id - b.id;
+	});
+	var addedIds = [];
+	for (var i = 0; i < candidates.length; i++) {
+		var room = candidates[i];
+		var option = document.createElement("option");
+		try {
+			option.text = getRoomName(room);
+		}
+		catch (e) {
+			option.text = "matchmode " + room.id;
+		}
+		var vid = String(room.id);
+		option.value = vid;
+		roomCombobox.appendChild(option);
+		addedIds.push(vid);
+	}
+	var sel = String(ROOM);
+	if (addedIds.indexOf(sel) < 0) {
+		if (addedIds.length > 0) {
+			sel = addedIds[0];
+			ROOM = sel;
+			window.localStorage.setItem("dojotRoom", sel);
+		}
+		else {
+			sel = "";
+		}
+	}
+	if (sel !== "") {
+		roomCombobox.value = sel;
+	}
 }
 
 // Show msg to currentActionOutput
@@ -1402,10 +1552,31 @@ function callDiscard(tileNumber) {
 		let tileName = getTileName(tileID, false);
 		showCrtStrategyMsg(`Discard: ${tileName};`);
 		if (CHANGE_RECOMMEND_TILE_COLOR) {
-			view.DesktopMgr.Inst.mainrole.hand.forEach(
-				tile => tile.val.toString() == tileID ?
-					tile._SetColor(new Laya.Vector4(0.5, 0.8, 0.9, 1))
-					: tile._SetColor(new Laya.Vector4(1, 1, 1, 1)));
+			try {
+				var hand = view.DesktopMgr.Inst.mainrole.hand;
+				if (!helpTileColorWhite) {
+					helpTileColorWhite = new Laya.Vector4(1, 1, 1, 1);
+				}
+				if (!helpTileColorHighlight) {
+					helpTileColorHighlight = new Laya.Vector4(0.5, 0.8, 0.9, 1);
+				}
+				if (lastHelpRecommendHandIndex !== null &&
+					lastHelpRecommendHandIndex >= 0 &&
+					lastHelpRecommendHandIndex < hand.length &&
+					hand[lastHelpRecommendHandIndex]._SetColor) {
+					hand[lastHelpRecommendHandIndex]._SetColor(helpTileColorWhite);
+				}
+				if (tileNumber >= 0 && tileNumber < hand.length && hand[tileNumber]._SetColor) {
+					hand[tileNumber]._SetColor(helpTileColorHighlight);
+					lastHelpRecommendHandIndex = tileNumber;
+				}
+				else {
+					lastHelpRecommendHandIndex = null;
+				}
+			}
+			catch (e) {
+				log("CHANGE_RECOMMEND_TILE_COLOR: " + e);
+			}
 		}
 	}
 }
@@ -2342,7 +2513,7 @@ function getFoldThreshold(tilePrio, hand) {
 
 	foldValue = foldValue < 0 ? 0 : foldValue;
 
-	return Number(foldValue).toFixed(FOLD_THRESHOLD_PARAMS.FOLD_VALUE_DECIMALS);
+	return Number(Number(foldValue).toFixed(FOLD_THRESHOLD_PARAMS.FOLD_VALUE_DECIMALS));
 }
 
 //Return true if danger is too high in relation to the value of the hand
@@ -2350,6 +2521,9 @@ function shouldFold(tile, highestPrio = false) {
 	if (tile.shanten * 4 > tilesLeft) {
 		if (highestPrio) {
 			log("Hand is too far from tenpai before end of game. Fold!");
+			if (strategy !== STRATEGIES.FOLD) {
+				log(">>> DoJot: 【全局 FOLD 策略已激活】向听相对剩余牌过远，本大局内将维持防守路线 <<<");
+			}
 			strategy = STRATEGIES.FOLD;
 			strategyAllowsCalls = false;
 		}
@@ -2369,6 +2543,15 @@ function shouldFold(tile, highestPrio = false) {
 		return true;
 	}
 	return false;
+}
+
+// Sum of getTileDanger for every tile currently in hand (used for damaten / 早巡-style timing).
+function getOwnHandTotalTileDanger() {
+	var sum = 0;
+	for (var i = 0; i < ownHand.length; i++) {
+		sum += getTileDanger(ownHand[i]);
+	}
+	return sum;
 }
 
 //Using Parameter
@@ -2405,6 +2588,17 @@ function shouldRiichi(tilePrio) {
 	//No waits
 	if (tilePrio.waits < RIICHI_DECISION_PARAMS.NO_WAIT_MAX) {
 		log("Decline Riichi because of no waits.");
+		return false;
+	}
+
+	// 早巡（手牌总危险度仍低）+ 听牌剩余枚数过少 + 已有役 → 默听改良，不立直
+	if (strategy == STRATEGIES.GENERAL &&
+		tilePrio.shanten == 0 &&
+		typeof tilePrio.tenpaiWaitTilesRemaining === "number" &&
+		tilePrio.tenpaiWaitTilesRemaining < RIICHI_DECISION_PARAMS.DAMATEN_WAIT_TILES_REMAINING_MAX &&
+		getOwnHandTotalTileDanger() < RIICHI_DECISION_PARAMS.DAMATEN_EARLY_HAND_DANGER_THRESHOLD &&
+		tilePrio.yaku.closed >= RIICHI_DECISION_PARAMS.DAMATEN_HAS_YAKU_MIN_CLOSED) {
+		log("Decline Riichi: low outs + yaku while hand danger still low — damaten for improvement.");
 		return false;
 	}
 
@@ -2619,6 +2813,178 @@ function printTilePriority(tiles) {
 			"> Waits: <" + Number(tiles[i].waits).toFixed(3) +
 			"> Danger: <" + Number(tiles[i].danger).toFixed(2) + ">");
 	}
+}
+
+var helpTileParamsPanel = null;
+// Help 模式推荐切牌高亮：只改「上一张 + 当前张」的 _SetColor，避免对全手牌 forEach（Laya 材质更新开销大）
+var lastHelpRecommendHandIndex = null;
+var helpTileColorWhite = null;
+var helpTileColorHighlight = null;
+
+function getHelpTileLabel(tile) {
+	if (USE_EMOJI) {
+		return getTileEmoji(tile.type, tile.index, tile.dora);
+	}
+	return getTileName(tile, false);
+}
+
+function ensureHelpTileParamsPanel() {
+	if (helpTileParamsPanel || typeof document === "undefined") {
+		return;
+	}
+	helpTileParamsPanel = document.createElement("div");
+	helpTileParamsPanel.id = "dojot-help-tile-params";
+	helpTileParamsPanel.style.cssText = [
+		"position:fixed",
+		"top:72px",
+		"right:8px",
+		"max-width:min(320px,42vw)",
+		"max-height:78vh",
+		"overflow-y:auto",
+		"overflow-x:hidden",
+		"box-sizing:border-box",
+		"padding:10px 12px",
+		"border-radius:8px",
+		"background:rgba(0,0,0,0.42)",
+		"color:rgba(255,255,255,0.92)",
+		"font-size:13px",
+		"line-height:1.45",
+		"font-family:system-ui,Segoe UI,sans-serif",
+		"text-align:left",
+		"pointer-events:none",
+		"z-index:100000",
+		"white-space:pre-wrap",
+		"word-break:break-word",
+		"box-shadow:0 2px 12px rgba(0,0,0,0.25)"
+	].join(";");
+	document.body.appendChild(helpTileParamsPanel);
+}
+
+function resetHelpRecommendTileHighlight() {
+	if (lastHelpRecommendHandIndex === null) {
+		return;
+	}
+	try {
+		if (typeof view !== "undefined" && view.DesktopMgr && view.DesktopMgr.Inst &&
+			view.DesktopMgr.Inst.mainrole && view.DesktopMgr.Inst.mainrole.hand) {
+			var hand = view.DesktopMgr.Inst.mainrole.hand;
+			if (lastHelpRecommendHandIndex >= 0 && lastHelpRecommendHandIndex < hand.length && hand[lastHelpRecommendHandIndex]._SetColor) {
+				if (!helpTileColorWhite) {
+					helpTileColorWhite = new Laya.Vector4(1, 1, 1, 1);
+				}
+				hand[lastHelpRecommendHandIndex]._SetColor(helpTileColorWhite);
+			}
+		}
+	}
+	catch (e) {
+	}
+	lastHelpRecommendHandIndex = null;
+}
+
+function hideHelpTileParamsPanel() {
+	resetHelpRecommendTileHighlight();
+	if (helpTileParamsPanel) {
+		helpTileParamsPanel.style.display = "none";
+		helpTileParamsPanel.textContent = "";
+	}
+}
+
+function updateHelpTileParamsPanel(tiles) {
+	if (MODE !== AIMODE.HELP || !Array.isArray(tiles) || tiles.length === 0) {
+		hideHelpTileParamsPanel();
+		return;
+	}
+	ensureHelpTileParamsPanel();
+	var sorted = tiles.slice().sort(function (a, b) {
+		return b.priority - a.priority;
+	});
+	var lines = [
+		"### DoJot · Help",
+		"### 按 priority 排序（高 → 低）",
+		""
+	];
+	for (var i = 0; i < sorted.length; i++) {
+		var t = sorted[i];
+		var head = getHelpTileLabel(t.tile) + (USE_EMOJI ? " " + getTileName(t.tile, false) : "");
+		lines.push("### " + head);
+		lines.push("priority · " + Number(t.priority).toFixed(3));
+		lines.push("danger · " + Number(t.danger).toFixed(2));
+		lines.push("");
+	}
+	helpTileParamsPanel.textContent = lines.join("\n");
+	helpTileParamsPanel.style.display = "block";
+}
+
+function findTilePrioForTile(tiles, tile) {
+	for (var i = 0; i < tiles.length; i++) {
+		if (isSameTile(tiles[i].tile, tile, true)) {
+			return { prio: tiles[i], rankInArray: i };
+		}
+	}
+	return null;
+}
+
+function logTilePriorityFormulaBreakdown(tilePrio) {
+	if (!tilePrio || !tilePrio.score) {
+		return;
+	}
+	var dfp = typeof tilePrio.dangerForPriority === "number" ? tilePrio.dangerForPriority : tilePrio.danger - (tilePrio.sakigiri || 0);
+	var bd = calculateTilePriorityWithBreakdown(tilePrio.efficiency, tilePrio.score, dfp);
+	log("  priority formula: weightedEff=" + Number(bd.weightedEfficiency).toFixed(4) +
+		" (exp=" + Number(bd.efficiencyExponent).toFixed(4) + ", placeF=" + Number(bd.placementFactor).toFixed(3) + ")" +
+		", baseScore=" + Number(bd.baseScore).toFixed(1) +
+		", dangerTerm=" + Number(bd.dangerTerm).toFixed(3) +
+		" (dangerForPrio=" + Number(dfp).toFixed(3) + ": rawDanger=" + Number(tilePrio.danger).toFixed(3) +
+		", sakigiri=" + Number(tilePrio.sakigiri || 0).toFixed(3) + ")" +
+		", scoreAfterDanger=" + Number(bd.scoreAfterDanger).toFixed(2) +
+		(bd.usedNegativeEffHotfix ? ", negEffHotfix->scoreForProd=" + Number(bd.scoreForProduct).toFixed(2) : "") +
+		" => priority=" + Number(bd.priority).toFixed(3));
+}
+
+function logTopDiscardCandidates(tiles, limit) {
+	var safeOnly = tiles.filter(function (t) { return t.safe; });
+	var pool = safeOnly.length ? safeOnly : tiles.slice();
+	var sorted = pool.slice().sort(function (a, b) {
+		return b.priority - a.priority;
+	});
+	var n = Math.min(limit, sorted.length);
+	log("Top discard candidates (by adjusted priority, " + (safeOnly.length ? "safe only" : "all") + "):");
+	for (var i = 0; i < n; i++) {
+		var t = sorted[i];
+		log("  #" + (i + 1) + " " + getTileName(t.tile, false) +
+			" prio=" + Number(t.priority).toFixed(3) +
+			" danger=" + Number(t.danger).toFixed(2) +
+			" shanten=" + t.shanten +
+			" eff=" + Number(t.efficiency).toFixed(3) +
+			" retention=" + Number(t.retention || 0).toFixed(3) +
+			" yakuO=" + Number(t.yaku.open).toFixed(3));
+	}
+	if (sorted.length >= 2) {
+		log("  gap #1-#2 priority: " + Number(sorted[0].priority - sorted[1].priority).toFixed(3));
+	}
+	if (TILE_HOLDING_PARAMS.ENABLED) {
+		log("  (retention tie-break active when same shanten and |Δpriority|≤" + TILE_HOLDING_PARAMS.RETENTION_TIE_BREAK_GAP + " before sort)");
+	}
+}
+
+function logChosenDiscardRationale(tiles, chosenTile, pathLabel) {
+	var hit = findTilePrioForTile(tiles, chosenTile);
+	log("=== Discard choice rationale [" + pathLabel + "] ===");
+	if (!hit) {
+		log("Chosen tile not found in evaluated list (unexpected).");
+		return;
+	}
+	var p = hit.prio;
+	var foldTh = getFoldThreshold(p, ownHand);
+	log("Chosen: " + getTileName(chosenTile, false) +
+		" | arrayIndex(after safety sort)=" + hit.rankInArray +
+		" | shanten=" + p.shanten +
+		" | priority=" + Number(p.priority).toFixed(3) +
+		" | danger=" + Number(p.danger).toFixed(2) +
+		" | foldThreshold~" + foldTh +
+		" | safeFlag=" + p.safe);
+	logTilePriorityFormulaBreakdown(p);
+	log("=== End rationale ===");
 }
 
 //Input string to get an array of tiles (e.g. "123m456p789s1z")
@@ -2973,6 +3339,7 @@ function getYakuhai(triples) {
 	var yakuhai = 0;
 	yakuhai = parseInt(triples.filter(tile => tile.type == 3 && (tile.index > 4 || tile.index == seatWind || tile.index == roundWind)).length / 3);
 	yakuhai += parseInt(triples.filter(tile => tile.type == 3 && tile.index == seatWind && tile.index == roundWind).length / 3);
+	yakuhai *= HONOR_BALANCE_PARAMS.YAKUHAI_VALUE_MULTIPLIER;
 	return { open: yakuhai, closed: yakuhai };
 }
 
@@ -3471,8 +3838,16 @@ function discardFold(tiles) {
 			if (tile.shanten == Math.min(...tiles.map(t => t.shanten)) && //If next tile same shanten as the best tile
 				tile.danger < Math.min(...tiles.map(t => t.danger)) * DISCARD_FOLD_PARAMS.SAME_SHANTEN_DANGER_TOLERANCE_MULTIPLIER && //And the tile is not much more dangerous than the safest tile
 				tile.danger <= foldThreshold * DISCARD_FOLD_PARAMS.FOLD_THRESHOLD_DANGER_MULTIPLIER) {
+				log("discardFold: blended mode — same min-shanten as best, danger ≤ minDanger*" + DISCARD_FOLD_PARAMS.SAME_SHANTEN_DANGER_TOLERANCE_MULTIPLIER +
+					" and ≤ foldThreshold*" + DISCARD_FOLD_PARAMS.FOLD_THRESHOLD_DANGER_MULTIPLIER + " (~" + foldThreshold + ").");
+				log(">>> DoJot: 【混合弃和】在最小向听约束下选相对安全切牌（非全局 FOLD）<<<");
 				log("Tile Priorities: ");
-				printTilePriority(tiles);
+				if (MODE !== AIMODE.HELP) {
+					printTilePriority(tiles);
+				}
+				updateHelpTileParamsPanel(tiles);
+				logTopDiscardCandidates(tiles, 5);
+				logChosenDiscardRationale(tiles, tile.tile, "discardFold-blend");
 				discardTile(tile.tile);
 				return tile.tile;
 			}
@@ -3486,8 +3861,16 @@ function discardFold(tiles) {
 	tiles.sort(function (p1, p2) {
 		return p1.danger - p2.danger;
 	});
+	log(">>> DoJot: 【全弃切牌】本巡按危险度升序，将打出现估最安的一张 <<<");
+	log("discardFold: full fold — pick lowest danger among evaluated discards.");
 	log("Fold Tile Priorities: ");
-	printTilePriority(tiles);
+	if (MODE !== AIMODE.HELP) {
+		printTilePriority(tiles);
+	}
+	updateHelpTileParamsPanel(tiles);
+	if (tiles.length) {
+		logChosenDiscardRationale(tiles, tiles[0].tile, "discardFold-full");
+	}
 
 	discardTile(tiles[0].tile);
 	return tiles[0].tile;
@@ -3546,10 +3929,61 @@ async function getTilePriorities(inputHand) {
 		}
 	}
 
+	applyTileRetentionAdjustment(tiles);
+
 	tiles.sort(function (p1, p2) {
+		if (TILE_HOLDING_PARAMS.ENABLED &&
+			p1.shanten == p2.shanten &&
+			Math.abs(p2.priority - p1.priority) <= TILE_HOLDING_PARAMS.RETENTION_TIE_BREAK_GAP) {
+			var dr = (p1.retention || 0) - (p2.retention || 0);
+			if (dr !== 0) {
+				return dr;
+			}
+		}
 		return p2.priority - p1.priority;
 	});
 	return Promise.resolve(tiles);
+}
+
+function getTileRetentionScore(tile) {
+	if (!TILE_HOLDING_PARAMS.ENABLED || !tile || tile.type == 3) {
+		return 0;
+	}
+	var quality = getWaitQuality(tile);
+	var baseline = TILE_HOLDING_PARAMS.RETENTION_BASELINE_QUALITY;
+	if (quality <= baseline) {
+		return 0;
+	}
+	return quality - baseline;
+}
+
+function getRetentionWaitMultiplier(waitTiles) {
+	if (!TILE_HOLDING_PARAMS.ENABLED || !Array.isArray(waitTiles) || waitTiles.length == 0) {
+		return 1;
+	}
+	var totalRetention = 0;
+	waitTiles.forEach(function (waitTile) {
+		totalRetention += getTileRetentionScore(waitTile);
+	});
+	var avgRetention = totalRetention / waitTiles.length;
+	return 1 + avgRetention;
+}
+
+function applyTileRetentionAdjustment(tiles) {
+	if (!Array.isArray(tiles) || !TILE_HOLDING_PARAMS.ENABLED) {
+		return;
+	}
+	for (let tilePrio of tiles) {
+		tilePrio.retention = 0;
+		if (!tilePrio || !tilePrio.tile || tilePrio.shanten > TILE_HOLDING_PARAMS.RETENTION_MAX_SHANTEN) {
+			continue;
+		}
+		tilePrio.retention = getTileRetentionScore(tilePrio.tile);
+		tilePrio.priority -= tilePrio.retention * TILE_HOLDING_PARAMS.RETENTION_PRIORITY_PENALTY;
+		if (tilePrio.riichiPriority && tilePrio.riichiPriority !== 0) {
+			tilePrio.riichiPriority -= tilePrio.retention * TILE_HOLDING_PARAMS.RETENTION_PRIORITY_PENALTY;
+		}
+	}
 }
 
 /*
@@ -3578,7 +4012,8 @@ The rest is some math to produce the same result which would result in actually 
 *			waits: waits,             // 听牌种类数
 *			shape: shape,             // 听牌形状质量
 *			danger: danger,           // 危险度
-*			fu: fu                    // 符数期望
+*			fu: fu,                   // 符数期望
+*			tenpaiWaitTilesRemaining: n // 听牌时待ち牌在山中剩余枚数之和（仅听牌时有值）
  * };
  * 			
  * tileCombinations = [
@@ -3927,6 +4362,9 @@ function getHandValues(hand, discardedTile) {
 	if (waitTiles.length > 0) {
 		waits *= (waitTiles.length * 0.15) + 0.75; //Waiting on multiple tiles is better
 		// 2: 0.90, 3:1.05, 4:1.20
+		if (baseShanten == 0) {
+			waits *= getRetentionWaitMultiplier(waitTiles);
+		}
 	}
 
 	fu = fu <= 30 ? 30 : fu;
@@ -3955,27 +4393,43 @@ function getHandValues(hand, discardedTile) {
 		sakigiri = getSakigiriValue(hand, discardedTile);
 	}
 
-	var priority = calculateTilePriority(efficiency, expectedScore, danger - sakigiri);
+	var dangerForPriority = danger - sakigiri;
+	var priority = calculateTilePriority(efficiency, expectedScore, dangerForPriority);
 
 	var riichiPriority = 0;
 	if (originalShanten == 0) { //Already in Tenpai: Look at waits instead
 		riichiEfficiency = waits / 10;
-		riichiPriority = calculateTilePriority(riichiEfficiency, expectedScore, danger - sakigiri);
+		riichiPriority = calculateTilePriority(riichiEfficiency, expectedScore, dangerForPriority);
+	}
+
+	var tenpaiWaitTilesRemaining = undefined;
+	if (baseShanten === 0 && waitTiles.length > 0) {
+		tenpaiWaitTilesRemaining = 0;
+		var uniqueWaits = [];
+		for (let wt of waitTiles) {
+			if (uniqueWaits.some(function (u) { return isSameTile(u, wt); })) {
+				continue;
+			}
+			uniqueWaits.push(wt);
+			tenpaiWaitTilesRemaining += getNumberOfTilesAvailable(wt.index, wt.type);
+		}
 	}
 
 	return {
 		tile: discardedTile, priority: priority, riichiPriority: riichiPriority, shanten: baseShanten, efficiency: efficiency,
-		score: expectedScore, dora: doraValue, yaku: yaku, waits: waits, shape: shape, danger: danger, fu: fu
+		score: expectedScore, dora: doraValue, yaku: yaku, waits: waits, shape: shape, danger: danger, fu: fu,
+		sakigiri: sakigiri, dangerForPriority: dangerForPriority,
+		tenpaiWaitTilesRemaining: tenpaiWaitTilesRemaining
 	};
 }
 
 //Using Parameter
 //Calculates a relative priority based on how "good" the given values are.
 //The resulting priority value is useless as an absolute value, only use it relatively to compare with other values of the same hand.
-function calculateTilePriority(efficiency, expectedScore, danger) {
-	var score = expectedScore.open;
+function calculateTilePriorityWithBreakdown(efficiency, expectedScore, danger) {
+	var baseScore = expectedScore.open;
 	if (isClosed) {
-		score = expectedScore.closed;
+		baseScore = expectedScore.closed;
 	}
 
 	var placementFactor = 1;
@@ -3984,19 +4438,35 @@ function calculateTilePriority(efficiency, expectedScore, danger) {
 		placementFactor = TILE_PRIORITY_PARAMS.FIRST_PLACE_LAST_GAME_FACTOR;
 	}
 
-	//Basically the formula should be efficiency multiplied by score (=expected value of the hand)
-	//But it's generally better to just win even with a small score to prevent others from winning (and no-ten penalty) 
-	//That's why efficiency is weighted a bit higher with Math.pow.
-	var weightedEfficiency = Math.pow(Math.abs(efficiency), TILE_PRIORITY_PARAMS.WEIGHTED_EFFICIENCY_EXPONENT_BASE + EFFICIENCY * placementFactor);
+	var exp = TILE_PRIORITY_PARAMS.WEIGHTED_EFFICIENCY_EXPONENT_BASE + EFFICIENCY * placementFactor;
+	var weightedEfficiency = Math.pow(Math.abs(efficiency), exp);
 	weightedEfficiency = efficiency < 0 ? -weightedEfficiency : weightedEfficiency;
 
-	score -= (danger * TILE_PRIORITY_PARAMS.DANGER_PENALTY_MULTIPLIER * SAFETY);
+	var dangerTerm = danger * TILE_PRIORITY_PARAMS.DANGER_PENALTY_MULTIPLIER * SAFETY;
+	var scoreAfterDanger = baseScore - dangerTerm;
 
+	var scoreForProduct = scoreAfterDanger;
+	var usedNegativeEffHotfix = false;
 	if (weightedEfficiency < 0) { //Hotfix for negative efficiency (increasing shanten)
-		score = TILE_PRIORITY_PARAMS.NEGATIVE_EFFICIENCY_HOTFIX_BASE_SCORE - score;
+		scoreForProduct = TILE_PRIORITY_PARAMS.NEGATIVE_EFFICIENCY_HOTFIX_BASE_SCORE - scoreAfterDanger;
+		usedNegativeEffHotfix = true;
 	}
 
-	return weightedEfficiency * score;
+	return {
+		priority: weightedEfficiency * scoreForProduct,
+		weightedEfficiency: weightedEfficiency,
+		baseScore: baseScore,
+		dangerTerm: dangerTerm,
+		scoreAfterDanger: scoreAfterDanger,
+		scoreForProduct: scoreForProduct,
+		usedNegativeEffHotfix: usedNegativeEffHotfix,
+		placementFactor: placementFactor,
+		efficiencyExponent: exp
+	};
+}
+
+function calculateTilePriority(efficiency, expectedScore, danger) {
+	return calculateTilePriorityWithBreakdown(efficiency, expectedScore, danger).priority;
 }
 
 //Using Parameter
@@ -4027,6 +4497,7 @@ function chiitoitsuPriorities() {
 		var yaku = { open: 0, closed: 0 };
 
 		var shape = 0;
+		var tenpaiWaitTilesRemaining = undefined;
 
 		//Possible Value, Yaku and Dora after Draw
 		handWithoutPairs.forEach(function (tile) {
@@ -4043,6 +4514,7 @@ function chiitoitsuPriorities() {
 				yaku.closed += (y2.closed - baseYaku.closed) * chance;
 				if (pairsValue + (pairs2.length / 2) == 7) { //Winning hand
 					waits = numberOfTiles * getWaitQuality(tile);
+					tenpaiWaitTilesRemaining = getNumberOfTilesAvailable(tile.index, tile.type);
 					doraValue = getNumberOfDoras(pairs2);
 					if (tile.index < 3 || tile.index > 7 || tile.doraValue > 0 || getWaitQuality(tile) > 1.1 || //Good Wait
 						currentHand.filter(tile => tile.type == 3 || tile.index == 1 || tile.index == 9).length == 0) { //Or Tanyao
@@ -4072,10 +4544,13 @@ function chiitoitsuPriorities() {
 
 		var sakigiri = getSakigiriValue(newHand, ownHand[i]);
 
-		var priority = calculateTilePriority(efficiency, expectedScore, danger - sakigiri);
+		var dangerForPriority = danger - sakigiri;
+		var priority = calculateTilePriority(efficiency, expectedScore, dangerForPriority);
 		tiles.push({
 			tile: ownHand[i], priority: priority, riichiPriority: priority, shanten: baseShanten, efficiency: efficiency,
-			score: expectedScore, dora: doraValue, yaku: yaku, waits: waits, shape: shape, danger: danger, fu: 25
+			score: expectedScore, dora: doraValue, yaku: yaku, waits: waits, shape: shape, danger: danger, fu: 25,
+			sakigiri: sakigiri, dangerForPriority: dangerForPriority,
+			tenpaiWaitTilesRemaining: baseShanten === 0 ? tenpaiWaitTilesRemaining : undefined
 		});
 	}
 
@@ -4120,9 +4595,11 @@ function thirteenOrphansPriorities() {
 		var doraValue = getNumberOfDoras(hand);
 		var yaku = { open: 13, closed: 13 };
 		var waits = 0;
+		var tenpaiWaitTilesRemaining = undefined;
 		if (shanten == 0) {
 			var missingTile = getMissingTilesForThirteenOrphans(uniqueTerminalHonors)[0];
 			waits = getNumberOfNonFuritenTilesAvailable(missingTile.index, missingTile.type);
+			tenpaiWaitTilesRemaining = getNumberOfTilesAvailable(missingTile.index, missingTile.type);
 		}
 
 		var efficiency = shanten == originalShanten ? 1 : 0;
@@ -4130,11 +4607,14 @@ function thirteenOrphansPriorities() {
 		var sakigiri = getSakigiriValue(hand, ownHand[i], danger);
 		var yakuman = calculateScore(0, 13);
 		var expectedScore = { open: 0, closed: yakuman, riichi: yakuman };
-		var priority = calculateTilePriority(efficiency, expectedScore, danger - sakigiri);
+		var dangerForPriority = danger - sakigiri;
+		var priority = calculateTilePriority(efficiency, expectedScore, dangerForPriority);
 
 		tiles.push({
 			tile: ownHand[i], priority: priority, riichiPriority: priority, shanten: shanten, efficiency: efficiency,
-			score: expectedScore, dora: doraValue, yaku: yaku, waits: waits, shape: 0, danger: danger, fu: 30
+			score: expectedScore, dora: doraValue, yaku: yaku, waits: waits, shape: 0, danger: danger, fu: 30,
+			sakigiri: sakigiri, dangerForPriority: dangerForPriority,
+			tenpaiWaitTilesRemaining: tenpaiWaitTilesRemaining
 		});
 
 	}
@@ -4208,9 +4688,14 @@ async function discard() {
 	}
 
 	log("Tile Priorities: ");
-	printTilePriority(tiles);
+	if (MODE !== AIMODE.HELP) {
+		printTilePriority(tiles);
+	}
+	updateHelpTileParamsPanel(tiles);
+	logTopDiscardCandidates(tiles, 5);
 
 	var tile = getDiscardTile(tiles);
+	logChosenDiscardRationale(tiles, tile, "normal");
 	markTenpaiFromTilePrio(tiles && tiles.length > 0 ? tiles[0] : null);
 
 	var riichi = false;
@@ -4218,7 +4703,20 @@ async function discard() {
 		tiles.sort(function (p1, p2) {
 			return p2.riichiPriority - p1.riichiPriority;
 		});
+		var topRiichi = tiles.length ? tiles[0] : null;
 		riichi = callRiichi(tiles);
+		if (riichi && topRiichi && topRiichi.riichiPriority !== 0) {
+			var riichiEff = topRiichi.waits / 10;
+			var dfpR = typeof topRiichi.dangerForPriority === "number" ? topRiichi.dangerForPriority : topRiichi.danger - (topRiichi.sakigiri || 0);
+			log("Riichi: first matching tile in riichiPriority order " + getTileName(topRiichi.tile, false) +
+				"; riichiPriority=" + Number(topRiichi.riichiPriority).toFixed(3) +
+				" (uses efficiency=waits/10=" + Number(riichiEff).toFixed(4) + ", not discard efficiency).");
+			var bdR = calculateTilePriorityWithBreakdown(riichiEff, topRiichi.score, dfpR);
+			log("  riichi formula => weightedEff=" + Number(bdR.weightedEfficiency).toFixed(4) +
+				", baseScore=" + Number(bdR.baseScore).toFixed(1) +
+				", dangerTerm=" + Number(bdR.dangerTerm).toFixed(3) +
+				" => priority=" + Number(bdR.priority).toFixed(3));
+		}
 	}
 	if (!riichi) {
 		discardTile(tile);
@@ -4290,7 +4788,10 @@ function keepSafetile(tiles) {
 function getDiscardTile(tiles) {
 	var tile = tiles[0].tile;
 
-	if (tiles[0].valid && (tiles[0].yaku.open >= DISCARD_TILE_PARAMS.YAKU_OPEN_MIN_KEEP || isClosed || tileLeft <= DISCARD_TILE_PARAMS.TILE_LEFT_MAX_KEEP)) {
+	if (tiles[0].valid && (tiles[0].yaku.open >= DISCARD_TILE_PARAMS.YAKU_OPEN_MIN_KEEP || isClosed || tilesLeft <= DISCARD_TILE_PARAMS.TILE_LEFT_MAX_KEEP)) {
+		log("getDiscardTile: use sort #1 " + getTileName(tile, false) +
+			" (openHand=" + !isClosed + ", yaku.open=" + Number(tiles[0].yaku.open).toFixed(3) +
+			", minKeep=" + DISCARD_TILE_PARAMS.YAKU_OPEN_MIN_KEEP + ", tilesLeft=" + tilesLeft + ").");
 		return tile;
 	}
 
@@ -4306,7 +4807,12 @@ function getDiscardTile(tiles) {
 		}
 	}
 	if (getTileName(tile) != (getTileName(tiles[0].tile))) {
-		log("Hand is open, trying to keep at least 1 Yaku.");
+		log("getDiscardTile: open-hand yaku preservation — override sort #1 " + getTileName(tiles[0].tile, false) +
+			" (prio=" + Number(tiles[0].priority).toFixed(3) + ", yaku.open=" + Number(tiles[0].yaku.open).toFixed(3) +
+			") -> " + getTileName(tile, false) + " (yaku.open=" + Number(highestYaku).toFixed(3) + ").");
+	}
+	else {
+		log("getDiscardTile: no higher-yaku alternative within danger threshold; keep sort #1 " + getTileName(tile, false) + ".");
 	}
 	return tile;
 }
@@ -4358,7 +4864,7 @@ function getTileDangerForPlayer(tile, player, playerPerspective = 0) {
 
 	//Honor tiles are often a preferred wait
 	if (tile.type == 3) {
-		danger *= 1.3;
+		danger *= HONOR_BALANCE_PARAMS.HONOR_BASE_DANGER_MULTIPLIER;
 	}
 
 	//Is Dora? -> 10% more dangerous
@@ -4377,7 +4883,7 @@ function getTileDangerForPlayer(tile, player, playerPerspective = 0) {
 	}
 	else if (otherHonitsu > 0) { //Is the player going for any other flush?
 		if (tile.type == 3) {
-			danger *= 1 + otherHonitsu; //Honor tiles are also dangerous
+			danger *= 1 + (otherHonitsu * HONOR_BALANCE_PARAMS.HONOR_OTHER_HONITSU_SCALING); //Honor tiles are also dangerous
 		}
 		else {
 			danger *= 1 - otherHonitsu; //Other tiles are less dangerous
@@ -4392,14 +4898,6 @@ function getTileDangerForPlayer(tile, player, playerPerspective = 0) {
 		danger /= 1 + (isDoingTanyao(player) / 10);
 	}
 
-	//Does the player have no yaku yet? Yakuhai is likely -> Honor tiles are 10% more dangerous
-	if (!hasYaku(player)) {
-		if (tile.type == 3 && (tile.index > 4 || tile.index == getSeatWind(player) || tile.index == getRoundWind()) &&
-			getNumberOfTilesAvailable(tile.type, tile.index) > 2) {
-			danger *= 1.1;
-		}
-	}
-
 	//Is Tile close to the tile discarded on the riichi turn? -> 10% more dangerous
 	if (isPlayerRiichi(player) && riichiTiles[getCorrectPlayerNumber(player)] != null &&
 		typeof riichiTiles[getCorrectPlayerNumber(player)] != 'undefined') {
@@ -4408,16 +4906,18 @@ function getTileDangerForPlayer(tile, player, playerPerspective = 0) {
 		}
 	}
 
-	//Is Tile close to an early discard (first row)? -> 10% less dangerous
-	discards[player].slice(0, 6).forEach(function (earlyDiscard) {
-		if (isTileCloseToOtherTile(tile, earlyDiscard)) {
-			danger *= 0.9;
-		}
-	});
+	//Keep old simple early-discard rule for compatibility when advanced defense is disabled.
+	if (!ADVANCED_DEFENSE_PARAMS.ENABLED) {
+		discards[player].slice(0, ADVANCED_DEFENSE_PARAMS.EARLY_DISCARD_MAX_COUNT).forEach(function (earlyDiscard) {
+			if (isTileCloseToOtherTile(tile, earlyDiscard)) {
+				danger *= ADVANCED_DEFENSE_PARAMS.EARLY_NEAR_MULTIPLIER;
+			}
+		});
+	}
 
-	//Danger is at least 5
-	if (danger < 5) {
-		danger = 5;
+	//Danger is at least a small floor value
+	if (danger < ADVANCED_DEFENSE_PARAMS.DANGER_FLOOR) {
+		danger = ADVANCED_DEFENSE_PARAMS.DANGER_FLOOR;
 	}
 
 	return danger;
@@ -4483,7 +4983,8 @@ function getExpectedHandValue(player) {
 
 	//Yakus (only for open hands)
 	hanValue += (Math.max(isDoingHonitsu(player, 0) * 2), (isDoingHonitsu(player, 1) * 2), (isDoingHonitsu(player, 2) * 2)) +
-		(isDoingToiToi(player) * 2) + (isDoingTanyao(player) * 1) + (isDoingYakuhai(player) * 1);
+		(isDoingToiToi(player) * 2) + (isDoingTanyao(player) * 1) +
+		(isDoingYakuhai(player) * HONOR_BALANCE_PARAMS.YAKUHAI_OPPONENT_VALUE_MULTIPLIER);
 
 	//Expect some hidden Yaku when more tiles are unknown. 1.3 Yaku for a fully concealed hand, less for open hands
 	if (calls[player].length == 0) {
@@ -4770,7 +5271,91 @@ function getWaitScoreForTileAndPlayer(player, tile, includeOthers, useKnowledgeO
 	//Bridge Wait
 	score += (tileL1 * tileU1 * tile0Public) * furitenFactor * toitoiFactor;
 
+	if (ADVANCED_DEFENSE_PARAMS.ENABLED && tile.type != 3) {
+		score *= getAdvancedDefenseDangerMultiplier(player, tile, useKnowledgeOfOwnHand);
+	}
+
 	return score;
+}
+
+function getAdvancedDefenseDangerMultiplier(player, tile, useKnowledgeOfOwnHand) {
+	var suji = getSujiDangerMultiplier(player, tile);
+	var early = getEarlyDiscardDangerMultiplier(player, tile);
+	var wall = getWallDangerMultiplier(tile, useKnowledgeOfOwnHand);
+	return suji * early * wall;
+}
+
+function getSujiDangerMultiplier(player, tile) {
+	if (tile.type == 3) {
+		return 1;
+	}
+	var leftSuji = tile.index - 3 >= 1 && getLastTileInDiscard(player, { index: tile.index - 3, type: tile.type }) != null;
+	var rightSuji = tile.index + 3 <= 9 && getLastTileInDiscard(player, { index: tile.index + 3, type: tile.type }) != null;
+	if (leftSuji && rightSuji) {
+		return ADVANCED_DEFENSE_PARAMS.SUJI_BOTH_SIDE_MULTIPLIER;
+	}
+	if (leftSuji || rightSuji) {
+		return ADVANCED_DEFENSE_PARAMS.SUJI_ONE_SIDE_MULTIPLIER;
+	}
+	return 1;
+}
+
+function getEarlyDiscardDangerMultiplier(player, tile) {
+	var maxCount = Math.max(0, ADVANCED_DEFENSE_PARAMS.EARLY_DISCARD_MAX_COUNT);
+	var earlyDiscards = discards[player].slice(0, maxCount);
+	var multiplier = 1;
+	for (let earlyDiscard of earlyDiscards) {
+		if (earlyDiscard.type != tile.type || tile.type == 3) {
+			continue;
+		}
+		var distance = Math.abs(earlyDiscard.index - tile.index);
+		if (distance == 0) {
+			multiplier *= ADVANCED_DEFENSE_PARAMS.EARLY_EXACT_MULTIPLIER;
+			continue;
+		}
+		if (distance == 1) {
+			multiplier *= ADVANCED_DEFENSE_PARAMS.EARLY_NEAR_MULTIPLIER;
+		}
+		if ((earlyDiscard.index == 2 || earlyDiscard.index == 3 || earlyDiscard.index == 7 || earlyDiscard.index == 8) &&
+			((tile.index <= 5 && earlyDiscard.index <= 3) || (tile.index >= 5 && earlyDiscard.index >= 7)) &&
+			distance <= 2) {
+			multiplier *= ADVANCED_DEFENSE_PARAMS.EARLY_EDGE_PATTERN_MULTIPLIER;
+		}
+	}
+	return multiplier;
+}
+
+function getPublicVisibleTileCount(index, type, useKnowledgeOfOwnHand) {
+	if (index < 1 || index > 9 || type < 0 || type > 3) {
+		return 0;
+	}
+	var visible = 4 - getNumberOfTilesAvailable(index, type);
+	if (useKnowledgeOfOwnHand) {
+		visible += getNumberOfTilesInTileArray(ownHand, index, type);
+	}
+	return visible;
+}
+
+function getWallDangerMultiplier(tile, useKnowledgeOfOwnHand) {
+	if (tile.type == 3) {
+		return 1;
+	}
+	var deadNearCount = 0;
+	var leftVisible = getPublicVisibleTileCount(tile.index - 1, tile.type, useKnowledgeOfOwnHand);
+	var rightVisible = getPublicVisibleTileCount(tile.index + 1, tile.type, useKnowledgeOfOwnHand);
+	if (leftVisible >= 4) {
+		deadNearCount++;
+	}
+	if (rightVisible >= 4) {
+		deadNearCount++;
+	}
+	if (deadNearCount >= 2) {
+		return ADVANCED_DEFENSE_PARAMS.WALL_DOUBLE_DEAD_MULTIPLIER;
+	}
+	if (deadNearCount == 1) {
+		return ADVANCED_DEFENSE_PARAMS.WALL_NEAR_DEAD_MULTIPLIER;
+	}
+	return 1;
 }
 
 //Returns 0 if tile is 100% furiten, 1 if not. Value between 0-1 is returned if furiten tile was not called some turns ago.
@@ -4963,6 +5548,9 @@ function main() {
 	}
 	if (!isInGame()) {
 		checkForEnd();
+		if (MODE === AIMODE.HELP) {
+			hideHelpTileParamsPanel();
+		}
 		showCrtActionMsg("Waiting for Game to start.");
 		log("Game is not running, sleep 2 seconds.");
 		errorCounter++;
@@ -4996,6 +5584,7 @@ function main() {
 
 		if (MODE === AIMODE.HELP) {
 			oldOps = [];
+			hideHelpTileParamsPanel();
 		}
 		return;
 	}

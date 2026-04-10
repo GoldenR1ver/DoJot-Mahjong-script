@@ -342,6 +342,21 @@
         "type": "int",
         "low": -500,
         "high": 1000
+      },
+      "DAMATEN_WAIT_TILES_REMAINING_MAX": {
+        "type": "int",
+        "low": 2,
+        "high": 6
+      },
+      "DAMATEN_EARLY_HAND_DANGER_THRESHOLD": {
+        "type": "float",
+        "low": 35,
+        "high": 100
+      },
+      "DAMATEN_HAS_YAKU_MIN_CLOSED": {
+        "type": "float",
+        "low": 0.5,
+        "high": 2
       }
     },
     
@@ -402,6 +417,107 @@
         "low": 2.0,
         "high": 5.0
       }
+    },
+
+    "ADVANCED_DEFENSE": {
+      "ENABLED": {
+        "type": "categorical",
+        "choices": [true, false]
+      },
+      "SUJI_ONE_SIDE_MULTIPLIER": {
+        "type": "float",
+        "low": 0.75,
+        "high": 1.0
+      },
+      "SUJI_BOTH_SIDE_MULTIPLIER": {
+        "type": "float",
+        "low": 0.55,
+        "high": 0.9
+      },
+      "EARLY_DISCARD_MAX_COUNT": {
+        "type": "int",
+        "low": 4,
+        "high": 9
+      },
+      "EARLY_EXACT_MULTIPLIER": {
+        "type": "float",
+        "low": 0.7,
+        "high": 1.0
+      },
+      "EARLY_NEAR_MULTIPLIER": {
+        "type": "float",
+        "low": 0.85,
+        "high": 1.0
+      },
+      "EARLY_EDGE_PATTERN_MULTIPLIER": {
+        "type": "float",
+        "low": 0.7,
+        "high": 1.0
+      },
+      "WALL_NEAR_DEAD_MULTIPLIER": {
+        "type": "float",
+        "low": 0.7,
+        "high": 1.0
+      },
+      "WALL_DOUBLE_DEAD_MULTIPLIER": {
+        "type": "float",
+        "low": 0.5,
+        "high": 0.9
+      },
+      "DANGER_FLOOR": {
+        "type": "float",
+        "low": 0.0,
+        "high": 8.0
+      }
+    },
+
+    "TILE_HOLDING": {
+      "ENABLED": {
+        "type": "categorical",
+        "choices": [true, false]
+      },
+      "RETENTION_MAX_SHANTEN": {
+        "type": "int",
+        "low": 0,
+        "high": 3
+      },
+      "RETENTION_BASELINE_QUALITY": {
+        "type": "float",
+        "low": 0.8,
+        "high": 1.2
+      },
+      "RETENTION_PRIORITY_PENALTY": {
+        "type": "float",
+        "low": 0.0,
+        "high": 120.0
+      },
+      "RETENTION_TIE_BREAK_GAP": {
+        "type": "float",
+        "low": 0.0,
+        "high": 500.0
+      }
+    },
+
+    "HONOR_BALANCE": {
+      "HONOR_BASE_DANGER_MULTIPLIER": {
+        "type": "float",
+        "low": 0.8,
+        "high": 1.4
+      },
+      "HONOR_OTHER_HONITSU_SCALING": {
+        "type": "float",
+        "low": 0.0,
+        "high": 1.0
+      },
+      "YAKUHAI_VALUE_MULTIPLIER": {
+        "type": "float",
+        "low": 0.4,
+        "high": 1.0
+      },
+      "YAKUHAI_OPPONENT_VALUE_MULTIPLIER": {
+        "type": "float",
+        "low": 0.4,
+        "high": 1.0
+      }
     }
   }
-  
